@@ -1,33 +1,28 @@
-        
 = First Ever Zoom Image Plugin for Prototype Framework =
 
-        Based on jQzoom Evolution Library v2.3 by Marco Renzi (http://www.mind-projects.it). Licensed under the BSD license.
-        
+Based on jQzoom Evolution Library v2.3 by Marco Renzi (http://www.mind-projects.it). Licensed under the BSD license.
+
 == Installation ==
- 
+
 To use this script, please add prototype library to your header. To use animation effects you should also add scriptaculous library, but it is not neccessary
 
- <code>
-            &lt;script type='text/javascript' src='js/prototype.js'&gt;&lt;/script&gt;  
-            &lt;script type='text/javascript' src='js/roomzoom.js'&gt;&lt;/script&gt;
-            &lt;script type=&quot;text/javascript&quot; src=&quot;http://script.aculo.us/scriptaculous.js&quot;&gt;&lt;/script&gt;
-        </code> 
+            <script type='text/javascript' src='js/prototype.js'></script>  
+            <script type='text/javascript' src='js/roomzoom.js'></script>
+            <script type="text/javascript" src="http://script.aculo.us/scriptaculous.js"></script>
+
 Add roomzoom.css to your header.
 
- <code>
-            &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;roomzoom.css&quot;&gt;  
-        </code> 
+            <link rel="stylesheet" type="text/css" href="roomzoom.css">  
+
 == How to use ==
- 
+
 Using RoomZoom is easy,but you need to specify the HTML anchor element,that is going to generate the zoom revealing a portion of the enlarged image.
 
- <code>
-            &lt;a href=&quot;images/BIGIMAGE.JPG&quot; class=&quot;MYCLASS&quot; title=&quot;MYTITLE&quot;&gt;  
-            &lt;img src=&quot;images/SMALLIMAGE.JPG&quot; title=&quot;IMAGE TITLE&quot;&gt;  
-            &lt;/a&gt;
-        </code> 
-The anchor element wraps the small image you would like to zoom.Following this schema the necessary and base elements are:
+            <a href="images/BIGIMAGE.JPG" class="MYCLASS" title="MYTITLE">  
+            <img src="images/SMALLIMAGE.JPG" title="IMAGE TITLE">  
+            </a>
 
+The anchor element wraps the small image you would like to zoom.Following this schema the necessary and base elements are:
 
 * SMALLIMAGE.JPG: Represents the small image you would like to zoom.
 * BIGIMAGE.JPG: Represents the big image that RoomZoom will reveal.
@@ -35,193 +30,95 @@ The anchor element wraps the small image you would like to zoom.Following this s
 * MYTITLE/IMAGE TITLE: Anchor title and/or image title that will be used to show the zoom title close to the RoomZoom Window.
 * PAY ATTENTION: The SMALLIMAGE must be a scaled versione of the BIGIMAGE.
 
-            Now load the plugin at window load.
-         <code>
+Now load the plugin at window load.
+
             document.observe('dom:loaded', function(){
                 zoom = new RoomZoom($('zoomer'));
             });   
-        </code> 
+
 This will instantiate RoomZoom in default(standard) mode.You can pass more options(Documentation section),to create special or custom effects as in the example below.
 
- <code>
             document.observe('dom:loaded', function(){
-            zoom = new RoomZoom($('zoomer'), {
-            alwaysOn : false,  
-            zoomWidth: 250,  
-            zoomHeight:200,  
-            position:'left',  
-            xOffset: 30,  
-            yOffset:80,
-            zoomType: 'revrse'
-            // More Options
-            ...
-            });
-
+                zoom = new RoomZoom($('zoomer'), {
+                    alwaysOn : false,  
+                    zoomWidth: 250,  
+                    zoomHeight:200,  
+                    position:'left',  
+                    xOffset: 30,  
+                    yOffset:80,
+                    zoomType: 'revrse'
+                    // More Options
+                    ...
+                });
             }); 
-        </code> 
+
 == Configuration options ==
-                                                                                     
-            Style customizations are obviously admitted simply changing the right parameters value in the jqzoom stylesheet file.
-        
+
+Style customizations are obviously admitted simply changing the right parameters value in the jqzoom stylesheet file.
+ 
 {| border="1"
 |-
-|
-                        Option name
-                    
-|
-                        Default value
-                    
-|
-                        Description
-                    
+|Option name
+|Default value
+|Description
 |-
-|
-                        zoomType
-                    
-|
-                        'standard'
-                    
-|
-                        Zoom type. The others admitted option values are 'reverse','drag','innerzoom'.
-                    
+|zoomType
+|'standard'
+|Zoom type. The others admitted option values are 'reverse','drag','innerzoom'.
 |-
-|
-                        zoomWidth
-                    
-|
-                        300
-                    
-|
-                        The popup window width showing the zoomed area.
-                    
+|zoomWidth
+|300
+|The popup window width showing the zoomed area.
 |-
-|
-                        zoomHeight
-                    
-|
-                        300
-                    
-|
-                        The popup window height showing the zoomed area.
-                    
+|zoomHeight
+|300
+|The popup window height showing the zoomed area.
 |-
-|
-                        xOffset
-                    
-|
-                        10
-                    
-|
-                        The popup window x offset from the small image. (always positive to move the popup window more on the right if position is "right" or more on the left if position is "left")
-                    
+|xOffset
+|10
+|The popup window x offset from the small image. (always positive to move the popup window more on the right if position is "right" or more on the left if position is "left")
 |-
-|
-                        yOffset
-                    
-|
-                        0
-                    
-|
-                        The popup window y offset from the small image. (always positive to move the popup window more on the top if position is "top" or more on the bottom if position is "bottom")
-                    
+|yOffset
+|0
+|The popup window y offset from the small image. (always positive to move the popup window more on the top if position is "top" or more on the bottom if position is "bottom")
 |-
-|
-                        position
-                    
-|
-                        'right'
-                    
-|
-                        The popup window y offset from the small image. (always positive to move the popup window more on the top if position is "top" or more on the bottom if position is "bottom")
-                    
+|position
+|'right'
+|The popup window y offset from the small image. (always positive to move the popup window more on the top if position is "top" or more on the bottom if position is "bottom")
 |-
-|
-                        preloadImages
-                    
-|
-                        true
-                    
-|
-if set to true,jqzoom will preload large images.
-                    
+|preloadImages
+|true
+|if set to true,jqzoom will preload large images.
 |-
-|
-                        preloadText
-                    
-|
-                        'Loading zoom'
-                    
-|
-The text to show while preloading images.
-                    
+|preloadText
+|'Loading zoom'
+|The text to show while preloading images.
 |-
-|
-                        title
-                    
-|
-                        true
-                    
-|
-Show a small title over the zoomed window it can be the anchor title and if not specified,it will get the small image title.
-                    
+|title
+|true
+|Show a small title over the zoomed window it can be the anchor title and if not specified,it will get the small image title.
 |-
-|
-                        lens
-                    
-|
-                        true
-                    
-|
-if set to false,the small lens,over the image, won't show.
-                    
+|lens
+|true
+|if set to false,the small lens,over the image, won't show.
 |-
-|
-                        imageOpacity
-                    
-|
-                        0.4
-                    
-|
-Set the image opacity when the 'zoomType' option is set to 'reverse'.
-                    
+|imageOpacity
+|0.4
+|Set the image opacity when the 'zoomType' option is set to 'reverse.
 |-
-|
-                        showEffect
-                    
-|
-                        'show'
-                    
-|
-The effect by which showing the popup window.Options available: 'show' ,'fadein'. To use 'fadein' effect, please add scriptaculous library.
-                    
+|showEffect
+|'show'
+|The effect by which showing the popup window.Options available: 'show' ,'fadein'. To use 'fadein' effect, please add scriptaculous library.
 |-
-|
-                        hideEffect
-                    
-|
-                        'show'
-                    
-|
-The effect by which hiding the popup window.Options available: 'hide' ,'fadeout'.. To use 'fadeout' effect, please add scriptaculous library.
-                    
+|hideEffect
+|'show'
+|The effect by which hiding the popup window.Options available: 'hide' ,'fadeout'.. To use 'fadeout' effect, please add scriptaculous library.
 |-
-|
-                        fadeinSpeed
-                    
-|
-                        1
-                    
-|
-Changes fade in speed,in case the showEffect option is set to 'fadein'. Integer values in seconds.
-                    
+|fadeinSpeed
+|1
+|Changes fade in speed,in case the showEffect option is set to 'fadein'. Integer values in seconds.
 |-
-|
-                        fadeoutSpeed
-                    
-|
-                        1
-                    
-|
-Changes fade out speed,in case the hideEffect option is set to 'fadeout'. Integer values in seconds.
-                    
-|}   
+|fadeoutSpeed
+|1
+|Changes fade out speed,in case the hideEffect option is set to 'fadeout'. Integer values in seconds.
+|}
