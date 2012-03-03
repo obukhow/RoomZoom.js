@@ -55,12 +55,12 @@ This will instantiate RoomZoom in default(standard) mode.You can pass more optio
 == Configuration options ==
 
 Style customizations are obviously admitted simply changing the right parameters value in the jqzoom stylesheet file.
- 
+
 {| border="1"
 |-
-|Option name
-|Default value
-|Description
+!Option name
+!Default value
+!Description
 |-
 |zoomType
 |'standard'
