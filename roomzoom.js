@@ -58,7 +58,11 @@ RoomZoom.prototype = {
             //hide/fadeout
             fadeinSpeed: '1',
             //fast/slow/number
-            fadeoutSpeed: '1'
+            fadeoutSpeed: '1',
+            //smothing speed from 1 to 99
+            smoothingSpeed : 40,
+            // use smoothing
+            smoothing : true
         }, settings || {});
         var obj;
         this.obj = obj = this;
@@ -534,11 +538,52 @@ RoomZoom.prototype = {
             };
             this.setposition = function () {
                 var left = -el.scale.x * (lens.getoffset().left - smallimage.bleft + 1);
-                var top = -el.scale.y * (lens.getoffset().top - smallimage.btop + 1);
-                $(this.node).setStyle({
-                    'left': left + 'px',
-                    'top': top + 'px'
-                });
+                var top = -el.scale.y * (lens.getoffset().top - smallimage.btop + 10);
+                left = Math.round(left);
+                top = Math.round(top);
+                if(settings.smoothing == false) {
+                    $($obj.node).setStyle({
+                        'left': left + 'px',
+                        'top': top + 'px'
+                    });
+                } else {
+                    var leftLarge, topLarge, widthDiff, heightDiff;
+                    leftLarge = parseInt($($obj.node).getStyle('left'));
+                    topLarge = parseInt($($obj.node).getStyle('top'));
+                    widthDiff = (left - leftLarge);
+                    heightDiff = (top - topLarge);
+                    if (!heightDiff && !widthDiff) {
+                        $obj.continueMoves = null;
+                        return
+                    }
+                    $obj.continueMoves = true;
+                    widthDiff *= settings.smoothingSpeed / 100;
+                    if (widthDiff < 1 && widthDiff > 0) {
+                        widthDiff = 1;
+                    } else {
+                        if (widthDiff > -1 && widthDiff < 0) {
+                            widthDiff = -1;
+                        }
+                    }
+                    leftLarge += widthDiff;
+                    heightDiff *= settings.smoothingSpeed / 100;
+                    if (heightDiff < 1 && heightDiff > 0) {
+                        heightDiff = 1;
+                    } else {
+                        if (heightDiff > -1 && heightDiff < 0) {
+                            heightDiff = -1;
+                        }
+                    }
+                    topLarge += heightDiff;
+
+                    $($obj.node).setStyle({
+                            'left': leftLarge + 'px',
+                            'top': topLarge + 'px'
+                    });
+                }
+                if($obj.continueMoves) {
+                    $obj.continueMoves = setTimeout(obj._continueMove.bind(obj), 100);
+                }
             };
             return this;
         };
@@ -724,6 +769,10 @@ RoomZoom.prototype = {
     },
     trim : function (str) {
         return str.trim();
+    },
+    
+    _continueMove : function() {
+        this.largeimage.setposition()
     },
     _drag : function (event) {
         this.img[0].writeAttribute('title','');
