@@ -62,7 +62,9 @@ RoomZoom.prototype = {
             //smothing speed from 1 to 99
             smoothingSpeed : 40,
             // use smoothing
-            smoothing : true
+            smoothing : true,
+            // thumbnails switching method
+            thumbnailChange: 'click'
         }, settings || {});
         var obj;
         this.obj = obj = this;
@@ -103,6 +105,12 @@ RoomZoom.prototype = {
             return n == obj.settings.zoomType;
         }) ) {
             obj.settings.zoomType = 'standard';
+        }
+        var switchTypes = ['click', 'mouseover'];
+        if(!switchTypes.any(function(n){
+            return n == obj.settings.thumbnailChange;
+        }) ) {
+            obj.settings.thumbnailChange = 'click';
         }
         /*========================================================,
 | Smallimage
@@ -699,7 +707,7 @@ RoomZoom.prototype = {
                 thumb_preload[i].src = thumb_options.largeimage;
                 i++;
             }
-            thumbnail.observe('click', function (e) {
+            thumbnail.observe(this.settings.thumbnailChange, function (e) {
                 if($(thumbnail).hasClassName('zoomThumbActive')){
                     return false;
                 }

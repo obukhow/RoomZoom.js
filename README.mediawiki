@@ -88,7 +88,7 @@ Style customizations are obviously admitted simply changing the right parameters
 |-
 |preloadImages
 |true
-|if set to true,jqzoom will preload large images.
+|if set to true, RoomZoom will preload large images.
 |-
 |preloadText
 |'Loading zoom'
@@ -128,5 +128,9 @@ Style customizations are obviously admitted simply changing the right parameters
 |-
 |smoothingSpeed
 |40
-|Smoothing speed from 1 to 99
+|Smoothing speed from 1 to 99.
+|-
+|thumbnailChange
+|'click'
+|Method to switch between multiple images. Available values are 'click' and 'mouseover'.
 |}
