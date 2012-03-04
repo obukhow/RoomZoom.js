@@ -2,6 +2,8 @@
 
 Based on jQzoom Evolution Library v2.3 by Marco Renzi (http://www.mind-projects.it). Licensed under the BSD license.
 
+[[File:http://i.imgur.com/vodvJ.png|Zoom example]]
+
 == Installation ==
 
 To use this script, please add prototype library to your header. To use animation effects you should also add scriptaculous library, but it is not neccessary
