@@ -456,6 +456,7 @@ RoomZoom.prototype = {
             this.show = function () {
                 switch (settings.showEffect) {
                     case 'fadein':
+                        this.node.setStyle({'opacity' : 0});
                         this.node.show();
                         this.node.fade({
                             duration: settings.fadeoutSpeed, 
