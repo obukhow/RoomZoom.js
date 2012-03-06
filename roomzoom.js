@@ -3,12 +3,12 @@
  * RoomZoom.js Javascript Image Zoom Plugin for Prototype framework
  *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
- * 
+ *
  * DISCLAIMER
  *
  * Redistribution and use in source and binary forms, with or without
@@ -365,12 +365,12 @@ RoomZoom.prototype = {
             }));
             this.node.update('<div id="zoomWrapper"><div id="zoomWrapperTitle"></div><div id="zoomWrapperImage"></div></div>')
             this.ieframe = new Element('iframe', ({
-                'id':'zoomIframe', 
-                'src': 'javascript:\'\';', 
-                'marginwidth':0, 
-                'marginheight':0, 
-                'align':'bottom', 
-                'scrolling':'no', 
+                'id':'zoomIframe',
+                'src': 'javascript:\'\';',
+                'marginwidth':0,
+                'marginheight':0,
+                'align':'bottom',
+                'scrolling':'no',
                 'frameborder':0
             }))
             this.setposition = function () {
@@ -442,8 +442,8 @@ RoomZoom.prototype = {
                 switch (settings.hideEffect) {
                     case 'fadeout':
                         this.node.fade({
-                            duration: settings.fadeinSpeed, 
-                            from: 1, 
+                            duration: settings.fadeinSpeed,
+                            from: 1,
                             to: 0
                         });
                         break;
@@ -459,8 +459,8 @@ RoomZoom.prototype = {
                         this.node.setStyle({'opacity' : 0});
                         this.node.show();
                         this.node.fade({
-                            duration: settings.fadeoutSpeed, 
-                            from: 0, 
+                            duration: settings.fadeoutSpeed,
+                            from: 0,
                             to: 1
                         });
                         break;
@@ -666,7 +666,11 @@ RoomZoom.prototype = {
             this._drag(event);
         }.bind(this));
         $("zoomPad").observe('mouseout', function (event) {
-            this.deactivate();
+            //mouseleave simulation
+            var relatedTarget = $(event.relatedTarget || event.toElement);
+            if (relatedTarget != event.currentTarget && relatedTarget.childOf(event.currentTarget) == false ) {
+                this.deactivate();
+            }
         }.bind(this));
         $("zoomPad").observe('mousemove', function (e) {
             //prevent fast mouse mevements not to fire the mouseout event
@@ -779,7 +783,7 @@ RoomZoom.prototype = {
     trim : function (str) {
         return str.trim();
     },
-    
+
     _continueMove : function() {
         this.largeimage.setposition()
     },
