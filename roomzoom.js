@@ -56,9 +56,9 @@ RoomZoom.prototype = {
             //show/fadein
             hideEffect: 'hide',
             //hide/fadeout
-            fadeinSpeed: '1',
+            fadeinSpeed: '0.5',
             //fast/slow/number
-            fadeoutSpeed: '1',
+            fadeoutSpeed: '0.5',
             //smothing speed from 1 to 99
             smoothingSpeed : 40,
             // use smoothing
@@ -360,6 +360,7 @@ RoomZoom.prototype = {
 `========================================================*/
         function Stage() {
             var $obj = this;
+            this.effect = null;
             this.node = new Element("div", ({
                 'id':'zoomWindow'
             }));
@@ -441,10 +442,17 @@ RoomZoom.prototype = {
             this.hide = function () {
                 switch (settings.hideEffect) {
                     case 'fadeout':
-                        this.node.fade({
-                            duration: settings.fadeinSpeed,
-                            from: 1,
-                            to: 0
+                        if (this.effect) {
+                            this.effect.cancel();
+                            this.effect = null;
+                        }
+                        this.effect = Effect.Fade(this.node, {
+                            duration: settings.fadeoutSpeed,
+                            to: 0,
+                            afterFinish: function() {
+                                $obj.effect = null;
+                                $obj.node.setOpacity(1);
+                            }
                         });
                         break;
                     default:
@@ -456,12 +464,22 @@ RoomZoom.prototype = {
             this.show = function () {
                 switch (settings.showEffect) {
                     case 'fadein':
-                        this.node.setStyle({'opacity' : 0});
+                        var from = 0;
+                        if (this.effect) {
+                            this.effect.cancel();
+                            this.effect = null;
+                            from = this.node.getOpacity();
+                        } else {
+                            this.node.setOpacity(0);
+                        }
                         this.node.show();
-                        this.node.fade({
-                            duration: settings.fadeoutSpeed,
-                            from: 0,
-                            to: 1
+                        this.effect = Effect.Fade(this.node, {
+                            duration: settings.fadeinSpeed,
+                            from: from,
+                            to: 1,
+                            afterFinish: function() {
+                                $obj.effect = null;
+                            }
                         });
                         break;
                     default:
@@ -669,7 +687,8 @@ RoomZoom.prototype = {
             //mouseleave simulation
             var relatedTarget = $(event.relatedTarget || event.toElement);
             if (relatedTarget != event.currentTarget && relatedTarget.childOf(event.currentTarget) == false ) {
-                this.deactivate();
+
+this.deactivate();
             }
         }.bind(this));
         $("zoomPad").observe('mousemove', function (e) {
@@ -788,15 +807,18 @@ RoomZoom.prototype = {
         this.largeimage.setposition()
     },
     _drag : function (event) {
-        this.img[0].writeAttribute('title','');
-        this.el.writeAttribute('title','');
-        this.el.zoom_active = true;
-        //if loaded then activate else load large image
-        this.smallimage.fetchdata();
-        if (this.el.largeimageloaded) {
-            this.activate(event);
-        } else {
-            this.load();
+        var relatedTarget = $(event.relatedTarget || event.toElement);
+        if (relatedTarget != event.currentTarget && (relatedTarget.childOf(event.currentTarget) == false)) {
+            this.img[0].writeAttribute('title','');
+            this.el.writeAttribute('title','');
+            this.el.zoom_active = true;
+            //if loaded then activate else load large image
+            this.smallimage.fetchdata();
+            if (this.el.largeimageloaded) {
+                this.activate(event);
+            } else {
+                this.load();
+            }
         }
     }
 };

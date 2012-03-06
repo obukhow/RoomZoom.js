@@ -8,20 +8,20 @@ Based on jQzoom Evolution Library v2.3 by Marco Renzi (http://www.mind-projects.
 
 To use this script, please add prototype library to your header. To use animation effects you should also add scriptaculous library, but it is not neccessary
 
-            <script type='text/javascript' src='js/prototype.js'></script>  
+            <script type='text/javascript' src='js/prototype.js'></script>
             <script type='text/javascript' src='js/roomzoom.js'></script>
             <script type="text/javascript" src="http://script.aculo.us/scriptaculous.js"></script>
 
 Add roomzoom.css to your header.
 
-            <link rel="stylesheet" type="text/css" href="roomzoom.css">  
+            <link rel="stylesheet" type="text/css" href="roomzoom.css">
 
 == How to use ==
 
 Using RoomZoom is easy,but you need to specify the HTML anchor element,that is going to generate the zoom revealing a portion of the enlarged image.
 
-            <a href="images/BIGIMAGE.JPG" class="MYCLASS" title="MYTITLE">  
-            <img src="images/SMALLIMAGE.JPG" title="IMAGE TITLE">  
+            <a href="images/BIGIMAGE.JPG" class="MYCLASS" title="MYTITLE">
+            <img src="images/SMALLIMAGE.JPG" title="IMAGE TITLE">
             </a>
 
 The anchor element wraps the small image you would like to zoom.Following this schema the necessary and base elements are:
@@ -36,23 +36,23 @@ Now load the plugin at window load.
 
             document.observe('dom:loaded', function(){
                 zoom = new RoomZoom($('zoomer'));
-            });   
+            });
 
 This will instantiate RoomZoom in default(standard) mode.You can pass more options(Documentation section),to create special or custom effects as in the example below.
 
             document.observe('dom:loaded', function(){
                 zoom = new RoomZoom($('zoomer'), {
-                    alwaysOn : false,  
-                    zoomWidth: 250,  
-                    zoomHeight:200,  
-                    position:'left',  
-                    xOffset: 30,  
+                    alwaysOn : false,
+                    zoomWidth: 250,
+                    zoomHeight:200,
+                    position:'left',
+                    xOffset: 30,
                     yOffset:80,
                     zoomType: 'revrse'
                     // More Options
                     ...
                 });
-            }); 
+            });
 
 == Configuration options ==
 
@@ -117,11 +117,11 @@ Style customizations are obviously admitted simply changing the right parameters
 |The effect by which hiding the popup window.Options available: 'hide' ,'fadeout'.. To use 'fadeout' effect, please add scriptaculous library.
 |-
 |fadeinSpeed
-|1
+|'0,5'
 |Changes fade in speed,in case the showEffect option is set to 'fadein'. Integer values in seconds.
 |-
 |fadeoutSpeed
-|1
+|'0,5'
 |Changes fade out speed,in case the hideEffect option is set to 'fadeout'. Integer values in seconds.
 |-
 |smoothing
