@@ -195,8 +195,8 @@ RoomZoom.prototype = {
                 this.node.left = (smallimage.ow - this.node.getWidth()) / 2;
                 //setting position
                 this.node.setStyle({
-                    'top': this.node.top,
-                    'left': this.node.left,
+                    'top': this.node.top + 'px',
+                    'left': this.node.left + 'px',
                     'position': 'absolute',
                     'visibility': 'visible'
                 });
@@ -262,8 +262,8 @@ RoomZoom.prototype = {
                 this.node.left = (smallimage.ow - this.node.w - 2) / 2;
                 //centering lens
                 this.node.setStyle({
-                    'top': this.node.top,
-                    'left': this.node.left
+                    'top': this.node.top + 'px',
+                    'left': this.node.left + 'px'
                 });
                 if (settings.zoomType == 'reverse') {
                     $(this.image).setStyle({
@@ -488,8 +488,8 @@ RoomZoom.prototype = {
                     this.ieframe.setStyle({
                         display: 'block',
                         position: "absolute",
-                        left: this.ieframe.left,
-                        top: this.ieframe.top,
+                        left: this.ieframe.left + 'px',
+                        top: this.ieframe.top + 'px',
                         zIndex: 99,
                         width: this.ieframe.width + 'px',
                         height: this.ieframe.height + 'px'
