@@ -340,9 +340,7 @@ RoomZoom.prototype = {
                     this.node.show();
                 }
                 if (settings.zoomType == 'reverse') {
-                    img[0].setStyle({
-                        'opacity': settings.imageOpacity
-                    });
+                    img[0].setOpacity(settings.imageOpacity);
                 }
             };
             this.getoffset = function () {
