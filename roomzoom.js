@@ -247,9 +247,7 @@ RoomZoom.prototype = {
                 });
                 if (settings.zoomType == 'reverse') {
                     this.image.src = smallimage.node.src;
-                    $(this.node).setStyle({
-                        'opacity': 1
-                    });
+                    $(this.node).setOpacity(1);
                     $(this.image).setStyle({
                         'position': 'absolute',
                         'display': 'block',
@@ -330,9 +328,7 @@ RoomZoom.prototype = {
                 largeimage.setposition();
             };
             this.hide = function () {
-                img[0].setStyle({
-                    'opacity': 1
-                });
+                img[0].setOpacity(1);
                 this.node.hide();
             };
             this.show = function () {
