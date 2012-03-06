@@ -814,5 +814,18 @@ this.deactivate();
                 this.load();
             }
         }
+    },
+
+    changeZoomType : function(type) {
+        var zoomtypes = ['standard', 'drag', 'innerzoom'];
+        if(!zoomtypes.any(function(n){
+            return n == type;
+        }) ) {
+            type = 'standard';
+        }
+        this.settings.zoomType = type;
+        $('zoomWindow').remove()
+        this.stage.append()
+        this.init()
     }
 };
