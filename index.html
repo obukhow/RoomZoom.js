@@ -1,91 +1,133 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset='utf-8'>
+    <head>
+        <meta charset='utf-8'>
+        <script src="js/prototype.js" type="text/javascript"></script>
+        <script type="text/javascript" src="http://script.aculo.us/scriptaculous.js"></script>
+        <script type="text/javascript" src="js/roomzoom.js"></script>
+        <link rel="stylesheet" href="css/roomzoom.css" type="text/css">
+        <title>roomine/RoomZoom.js @ GitHub</title>
 
-  <title>roomine/RoomZoom.js @ GitHub</title>
+        <style type="text/css">
+            body {
+                margin-top: 1.0em;
+                background: #ceeaf9 url('images/grid_noise.gif');
+                background-color: #ceeaf9;
+                font-family: Helvetica, Arial, FreeSans, san-serif;
+                color: #000000;
+            }
+            #container {
+                margin: 0 auto;
+                width: 700px;
+            }
+            h1 { font-size: 3.8em; color: #72c2ef; margin-bottom: 3px; }
+            h1 .small { font-size: 0.4em; }
+            h1 a { text-decoration: none }
+            h2 { font-size: 1.5em; color: #72c2ef; }
+            h3 { text-align: center; color: #72c2ef; }
+            a { color: #72c2ef; }
+            .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+            .download { float: right; }
+            pre { background: #000; color: #fff; padding: 15px;}
+            hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+            .footer { text-align:center; padding-top:30px; font-style: italic; }
+            .clearfix:after{clear:both;content:".";display:block;font-size:0;height:0;line-height:0;visibility:hidden;}
+            .clearfix{display:block;zoom:1}
+            ul#thumblist{display:block; padding-left: 0px;}
+            ul#thumblist li{float:left;margin-right:2px;list-style:none;}
+            ul#thumblist li a{display:block;border:1px solid #82c9f0;}
+            ul#thumblist li a.zoomThumbActive{
+                border:1px solid #198fd2;
+            }
+        </style>
+    </head>
 
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background: #ceeaf9 url('images/grid_noise.gif');
-      background-color: #ceeaf9;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #72c2ef; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #72c2ef; }
-    h3 { text-align: center; color: #72c2ef; }
-    a { color: #72c2ef; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
-</head>
+    <body>
+        <a href="https://github.com/roomine/RoomZoom.js"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
-<body>
-  <a href="https://github.com/roomine/RoomZoom.js"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+        <div id="container">
 
-  <div id="container">
+            <div class="download">
+                <a href="https://github.com/roomine/RoomZoom.js/zipball/master">
+                    <img border="0" width="90" src="https://github.com/images/modules/download/zip.png"></a>
+                <a href="https://github.com/roomine/RoomZoom.js/tarball/master">
+                    <img border="0" width="90" src="https://github.com/images/modules/download/tar.png"></a>
+            </div>
 
-    <div class="download">
-      <a href="https://github.com/roomine/RoomZoom.js/zipball/master">
-        <img border="0" width="90" src="https://github.com/images/modules/download/zip.png"></a>
-      <a href="https://github.com/roomine/RoomZoom.js/tarball/master">
-        <img border="0" width="90" src="https://github.com/images/modules/download/tar.png"></a>
+            <h1><a href="https://github.com/roomine/RoomZoom.js">RoomZoom.js</a>
+                <span class="small">by <a href="https://github.com/roomine">roomine</a></span></h1>
+
+            <div class="description">
+                First ever Zoom Image Plugin for Prototype Framework
+            </div>
+
+            <script type="text/javascript">
+
+                document.observe('dom:loaded', function(){
+                    zoom = new RoomZoom($('zoomer'), {
+                        alwaysOn : false,
+                        zoomWidth: 316,  
+                        zoomHeight:255,  
+                        thumbnailChange: 'mouseover',
+                        showEffect : 'fadein',
+                        hideEffect: 'fadeout',
+           
+                    });
+	
+                });
+
+
+            </script>
+
+
+            <div class="clearfix" id="content">
+                <div class="clearfix">
+                    <a href="images/triumph_big1.jpg" id="zoomer" rel='gal1'  title="triumph" >
+                        <img src="images/triumph_small1.jpg"  title="triumph"  style="border: 4px solid #72c2ef;">
+                    </a>
+                </div>
+                <br/>
+                <div class="clearfix" >
+                    <ul id="thumblist" class="clearfix" >
+                        <li><a class="zoomThumbActive" href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: 'images/triumph_small1.jpg',largeimage: 'images/triumph_big1.jpg'}"><img src='images/thumbs/triumph_thumb1.jpg'></a></li>
+                        <li><a href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: 'images/triumph_small2.jpg',largeimage: 'images/triumph_big2.jpg'}"><img src='images/thumbs/triumph_thumb2.jpg'></a></li>
+                        <li><a  href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: 'images/triumph_small3.jpg',largeimage: 'images/triumph_big3.jpg'}"><img src='images/thumbs/triumph_thumb3.jpg'></a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+
+
+
+            <h2>Authors</h2>
+            <p>Denis Obukhov (denis.obukhov@oggettoweb.com)
+                <br/>      </p>
+
+
+
+            <h2>Contact</h2>
+            <p>Denis (denis.obukhov@oggettoweb.com)
+                <br/>      </p>
+
+
+            <h2>Download</h2>
+            <p>
+                You can download this project in either
+                <a href="https://github.com/roomine/RoomZoom.js/zipball/master">zip</a> or
+                <a href="https://github.com/roomine/RoomZoom.js/tarball/master">tar formats.
+            </p>
+            <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
+                by running:
+            <pre>$ git clone git://github.com/roomine/RoomZoom.js</pre>
+        </p>
+
+        <div class="footer">
+            get the source code on GitHub : <a href="https://github.com/roomine/RoomZoom.js">roomine/RoomZoom.js</a>
+        </div>
+
     </div>
-
-    <h1><a href="https://github.com/roomine/RoomZoom.js">RoomZoom.js</a>
-      <span class="small">by <a href="https://github.com/roomine">roomine</a></span></h1>
-
-    <div class="description">
-      First ever Zoom Image Plugin for Prototype Framework
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-      <h2>Authors</h2>
-      <p>Denis Obukhov (denis.obukhov@oggettoweb.com)
-<br/>      </p>
-    
-
-    
-      <h2>Contact</h2>
-      <p>Denis (denis.obukhov@oggettoweb.com)
-<br/>      </p>
-    
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="https://github.com/roomine/RoomZoom.js/zipball/master">zip</a> or
-      <a href="https://github.com/roomine/RoomZoom.js/tarball/master">tar formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/roomine/RoomZoom.js</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="https://github.com/roomine/RoomZoom.js">roomine/RoomZoom.js</a>
-    </div>
-
-  </div>
 
 </body>
 </html>
