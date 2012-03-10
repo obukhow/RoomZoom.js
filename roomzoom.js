@@ -70,7 +70,8 @@ RoomZoom.prototype = {
         this.obj = obj = this;
         this.settings = settings;
         this.obj.el = this.el = el;
-        this.el.rel = $(el).readAttribute('rel');
+        //multiple page galleries
+        this.el.rel = ($(el).readAttribute('rel')) ? ($(el).readAttribute('rel')) : this._randomString(4);
         //ANCHOR ELEMENT
         el.zoom_active = false;
         el.zoom_disabled = false; //to disable single zoom instance
@@ -170,7 +171,7 @@ RoomZoom.prototype = {
             };
             this.node.onload = function () {
                 $obj.fetchdata();
-                if (!$("zoomPad")) obj.create();
+                if (!$("zoomPad" + obj.el.rel)) obj.create();
             };
             return $obj;
         };
@@ -183,12 +184,13 @@ RoomZoom.prototype = {
             var $obj = this;
             this.append = function () {
                 this.node = new Element('div', ({
-                    'id':'zoomPreload'
+                    'id':'zoomPreload' + obj.el.rel,
+                    'class':'zoomPreload'
                 }));
                 this.node.setStyle({
                     'visibility': 'hidden'
                 }).update(settings.preloadText);
-                $('zoomPad').appendChild(this.node);
+                $('zoomPad' + obj.el.rel).appendChild(this.node);
             };
             this.show = function () {
                 this.node.top = (smallimage.oh - this.node.getHeight()) / 2;
@@ -216,11 +218,12 @@ RoomZoom.prototype = {
         function Lens() {
             var $obj = this;
             this.node = new Element('div', ({
-                'id':'zoomPup'
+                'id'   : 'zoomPup'  + obj.el.rel,
+                'class': 'zoomPup'
             }));
             //this.nodeimgwrapper = $("<div/>").addClass('zoomPupImgWrapper');
             this.append = function () {
-                $('zoomPad').appendChild($(this.node).hide());
+                $('zoomPad'  + obj.el.rel).appendChild($(this.node).hide());
                 if (settings.zoomType == 'reverse') {
                     this.image = new Image();
                     this.image.src = smallimage.node.src; // fires off async
@@ -361,11 +364,13 @@ RoomZoom.prototype = {
         function Stage() {
             var $obj = this;
             this.node = new Element("div", ({
-                'id':'zoomWindow'
+                'id'    :'zoomWindow'  + obj.el.rel,
+                'class' :'zoomWindow'
             }));
-            this.node.update('<div id="zoomWrapper"><div id="zoomWrapperTitle"></div><div id="zoomWrapperImage"></div></div>')
+            this.node.update('<div id="zoomWrapper' + obj.el.rel + '" class="zoomWrapper"><div id="zoomWrapperTitle' + obj.el.rel + '" class="zoomWrapperTitle"></div><div id="zoomWrapperImage' + obj.el.rel + '" class="zoomWrapperImage"></div></div>')
             this.ieframe = new Element('iframe', ({
-                'id':'zoomIframe', 
+                'id':'zoomIframe' +  + obj.el.rel, 
+                'class':'zoomIframe' +  + obj.el.rel, 
                 'src': 'javascript:\'\';', 
                 'marginwidth':0, 
                 'marginheight':0, 
@@ -404,7 +409,7 @@ RoomZoom.prototype = {
                 return this;
             };
             this.append = function () {
-                $('zoomPad').appendChild(this.node);
+                $('zoomPad' + obj.el.rel).appendChild(this.node);
                 this.node.setStyle({
                     position: 'absolute',
                     display: 'none',
@@ -415,26 +420,26 @@ RoomZoom.prototype = {
                         cursor: 'default'
                     });
                     var thickness = (smallimage.bleft == 0) ? 1 : smallimage.bleft;
-                    $('zoomWrapper').setStyle({
+                    $('zoomWrapper' + obj.el.rel).setStyle({
                         borderWidth: thickness + 'px'
                     });
                 }
-                $('zoomWrapper').setStyle({
+                $('zoomWrapper' + obj.el.rel).setStyle({
                     width: Math.round(settings.zoomWidth) + 'px' ,
                     borderWidth: thickness + 'px'
                 });
-                $('zoomWrapperImage').setStyle({
+                $('zoomWrapperImage' + obj.el.rel).setStyle({
                     width: '100%',
                     height: Math.round(settings.zoomHeight) + 'px'
                 });
                 //zoom title
-                $('zoomWrapperTitle').setStyle({
+                $('zoomWrapperTitle' + obj.el.rel).setStyle({
                     width: '100%',
                     position: 'absolute'
                 });
-                $('zoomWrapperTitle').hide();
+                $('zoomWrapperTitle' + obj.el.rel).hide();
                 if (settings.title && zoomtitle.length > 0) {
-                    $('zoomWrapperTitle').update(zoomtitle).show();
+                    $('zoomWrapperTitle' + obj.el.rel).update(zoomtitle).show();
                 }
                 $obj.setposition();
             };
@@ -482,7 +487,7 @@ RoomZoom.prototype = {
                         width: this.ieframe.width + 'px',
                         height: this.ieframe.height + 'px'
                     });
-                    $('zoomPad').appendChild(this.ieframe);
+                    $('zoomPad' + obj.el.rel).appendChild(this.ieframe);
                     this.ieframe.show();
                 };
             };
@@ -522,10 +527,10 @@ RoomZoom.prototype = {
                 scale.y = ($obj.h / smallimage.h);
                 el.scale = scale;
                 document.body.removeChild(this.node);
-                $('zoomWrapperImage').childElements().each(function(child){
+                $('zoomWrapperImage' + obj.el.rel).childElements().each(function(child){
                     child.remove()
                     });
-                $('zoomWrapperImage').appendChild(this.node);
+                $('zoomWrapperImage' + obj.el.rel).appendChild(this.node);
                 //setting lens dimensions;
                 lens.setdimensions();
             };
@@ -599,14 +604,15 @@ RoomZoom.prototype = {
         if (img[0].complete) {
             //fetching data from sallimage if was previously loaded
             smallimage.fetchdata();
-            if (!$("zoomPad")) obj.create();
+            if (!$("zoomPad" + obj.el.rel)) obj.create();
         }
     },
     create: function () { //create the main objects
         //create ZoomPad
-        if (!$("zoomPad")) {
+        if (!$("zoomPad" + this.el.rel)) {
             this.el.zoomPad = new Element('div', ({
-                'id':'zoomPad'
+                'id':'zoomPad' + this.el.rel,
+                'class' : 'zoomPad',
             }));
             this.img[0].wrap(this.el.zoomPad);
         }
@@ -615,15 +621,15 @@ RoomZoom.prototype = {
             this.settings.zoomHeight = this.smallimage.h;
         }
         //creating ZoomPup
-        if (!$("zoomPup")) {
+        if (!$("zoomPup" + this.el.rel)) {
             this.lens.append();
         }
         //creating zoomWindow
-        if (!$("zoomWindow")) {
+        if (!$("zoomWindow" + this.el.rel)) {
             this.stage.append();
         }
         //creating Preload
-        if (!$("zoomPreload")) {
+        if (!$("zoomPreload" + this.el.rel)) {
             this.loader.append();
         }
         //preloading images
@@ -638,44 +644,44 @@ RoomZoom.prototype = {
         var settings = this.settings;
         //drag option
         if (this.settings.zoomType == 'drag') {
-            $("zoomPad").observe('mousedown', function () {
+            $("zoomPad" + this.el.rel).observe('mousedown', function () {
                 this.el.mouseDown = true;
             }.bind(this));
-            $("zoomPad").observe('mouseup', function () {
+            $("zoomPad" + this.el.rel).observe('mouseup', function () {
                 this.el.mouseDown = false;
             }.bind(this));
             document.body.ondragstart = function () {
                 return false;
             };
-            $("zoomPad").setStyle({
+            $("zoomPad" + this.el.rel).setStyle({
                 cursor: 'default'
             });
-            $("zoomPup").setStyle({
+            $("zoomPup" + this.el.rel).setStyle({
                 cursor: 'move'
             });
         }
         if (this.settings.zoomType == 'innerzoom') {
-            $("zoomWrapper").setStyle({
+            $("zoomWrapper"  + this.el.rel).setStyle({
                 cursor: 'crosshair'
             });
         }
-        $("zoomPad").observe('mouseenter', function (event) {
+        $("zoomPad" + this.el.rel).observe('mouseenter', function (event) {
             this._drag(event);
         }.bind(this));
-        $("zoomPad").observe('mouseover', function (event) {
+        $("zoomPad" + this.el.rel).observe('mouseover', function (event) {
             this._drag(event);
         }.bind(this));
-        $("zoomPad").observe('mouseout', function (event) {
+        $("zoomPad" + this.el.rel).observe('mouseout', function (event) {
             this.deactivate();
         }.bind(this));
-        $("zoomPad").observe('mousemove', function (e) {
+        $("zoomPad" + this.el.rel).observe('mousemove', function (e) {
             //prevent fast mouse mevements not to fire the mouseout event
             if (e.pageX > smallimage.pos.r || e.pageX < smallimage.pos.l || e.pageY < smallimage.pos.t || e.pageY > smallimage.pos.b) {
                 this.lens.setcenter();
                 return false;
             }
             el.zoom_active = true;
-            if (el.largeimageloaded && $('zoomWindow').getStyle('visibility') != 'visible') {
+            if (el.largeimageloaded && $('zoomWindow' + this.el.rel).getStyle('visibility') != 'visible') {
                 this.activate(e);
             }
             if (el.largeimageloaded && (settings.zoomType != 'drag' || (settings.zoomType == 'drag' && el.mouseDown))) {
@@ -794,5 +800,19 @@ RoomZoom.prototype = {
         } else {
             this.load();
         }
+    },
+    
+    _randomString : function (length) {
+        var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('');
+
+        if (! length) {
+            length = Math.floor(Math.random() * chars.length);
+        }
+
+        var str = '';
+        for (var i = 0; i < length; i++) {
+            str += chars[Math.floor(Math.random() * chars.length)];
+        }
+        return str;
     }
 };

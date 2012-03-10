@@ -29,13 +29,13 @@
  * @author     Denis Obukhov <denis.obukhov@oggettoweb.com>
  */
  
-#zoomPad {
+.zoomPad {
     cursor: crosshair;
     float: left;
     position: relative;
     z-index: 99;
 }
-#zoomPreload {
+.zoomPreload {
     background-color: white;
     background-image: url("../images/zoomloader.gif");
     background-position: 43px 30px;
@@ -55,7 +55,7 @@
     width: 90px;
     z-index: 110;
 }
-#zoomPup {
+.zoomPup {
     background-color: #FFFFFF;
     border: 1px solid #CCCCCC;
     cursor: crosshair;
@@ -64,7 +64,7 @@
     position: absolute;
     z-index: 101;
 }
-#zoomOverlay {
+.zoomOverlay {
     background: none repeat scroll 0 0 #FFFFFF;
     display: none;
     height: 100%;
@@ -74,7 +74,7 @@
     width: 100%;
     z-index: 101;
 }
-#zoomWindow {
+.zoomWindow {
     background: none repeat scroll 0 0 #FFFFFF;
     height: auto;
     left: 110%;
@@ -82,12 +82,12 @@
     top: 40px;
     z-index: 110;
 }
-#zoomWrapper {
+.zoomWrapper {
     border: 1px solid #999999;
     position: relative;
     z-index: 110;
 }
-#zoomWrapperTitle {
+.zoomWrapperTitle {
     background: none repeat scroll 0 0 #999999;
     color: #FFFFFF;
     display: block;
@@ -103,19 +103,19 @@
     width: 100%;
     z-index: 120;
 }
-#zoomWrapperImage {
+.zoomWrapperImage {
     display: block;
     overflow: hidden;
     position: relative;
     z-index: 110;
 }
-#zoomWrapperImage img {
+.zoomWrapperImage img {
     border: 0 none;
     display: block;
     position: absolute;
     z-index: 101;
 }
-#zoomIframe {
+.zoomIframe {
     display: block;
     opacity: 0.8;
     position: absolute;
