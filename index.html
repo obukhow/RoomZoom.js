@@ -14,7 +14,7 @@
                 background: #ceeaf9 url('images/grid_noise.gif');
                 background-color: #ceeaf9;
                 font-family: Helvetica, Arial, FreeSans, san-serif;
-                color: #000000;
+                color: #444;
             }
             #container {
                 margin: 0 auto;
@@ -41,12 +41,13 @@
                 border:1px solid #198fd2;
             }
             table {border:none; border-collapse: collapse; border-spacing: 0;}
-            table thead {text-align: left; background: #72c2ef; color: #fff; border:none;}
+            table thead {text-align: left; color: #34a8e9; border:none; border-bottom: 2px solid #34a8e9;}
             table tr {border:none; border-bottom: 1px solid #72c2ef;}
-            table thead td, table tr td{padding: 10px 10px 10px 0; border:none;}
+            table thead th, table tr td{padding: 10px 7px 10px 7px; border:none;}
+            table thead th { text-transform: capitalize; font-size: 1.1em; font-weight: normal; font-variant: small-caps;}
 /*            table tr:nth-child(2n) {background-color: #edf9ff; }*/
-            .td-value {width: 140px; font-family: monospace;}
-}
+            .td-value {width: 140px; font-family: monospace; border-left: 1px dashed #72C2EF; border-right: 1px dashed #72C2EF;}
+            th.td-value {font-family: sans-serif;}
         </style>
     </head>
 
@@ -272,7 +273,7 @@
                     <th>
                         Option name
                     </th>
-                    <th>
+                    <th class="td-value">
                         Default value
                     </th>
                     <th>
@@ -289,7 +290,7 @@
                         'standard'
                     </td>
                     <td>
-                        Zoom type. The others admitted option values are 'reverse','drag','innerzoom'.
+                        Zoom type. The others admitted option values are 'reverse', 'drag' and 'innerzoom'.
                     </td>
                 </tr>
                 <tr>
