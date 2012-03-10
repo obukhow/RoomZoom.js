@@ -39,6 +39,13 @@
             ul#thumblist li a.zoomThumbActive{
                 border:1px solid #198fd2;
             }
+            table {border:none; border-collapse: collapse; border-spacing: 0;}
+            table thead {text-align: left; background: #72c2ef; color: #fff; border:none;}
+            table tr {border:none; border-bottom: 1px solid #72c2ef;}
+            table thead tr td, table tr td{padding: 10px 10px 10px 0; border:none;}
+/*            table tr:nth-child(2n) {background-color: #edf9ff; }*/
+            .td-value {width: 140px; font-family: monospace;}
+}
         </style>
     </head>
 
@@ -58,7 +65,9 @@
                 <span class="small">by <a href="https://github.com/roomine">roomine</a></span></h1>
 
             <div class="description">
-                First ever Zoom Image Plugin for Prototype Framework
+                First ever Zoom Image Plugin for Prototype Framework.
+                <p>Based on jQzoom Evolution Library v2.3 by Marco Renzi (http://www.mind-projects.it), licensed under the BSD license.
+                </p>
             </div>
 
             <script type="text/javascript">
@@ -97,9 +106,298 @@
             </div>
 
 
+            <h2><a name="Installation">Installation</a></h2>
+
+
+            <p>To use this script, please add prototype library to your header. To use animation effects you should also add scriptaculous library, but it is not neccessary
+            </p>
+
+            <pre style='color:#d1d1d1;background:#000000;'>
+<span style='color:#ff8906; '>&lt;</span><span style='color:#e66170; font-weight:bold; '>script</span> type<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>'</span><span style='color:#00c4c4; '>text/javascript</span><span style='color:#00c4c4; '>'</span> src<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>'</span><span style='color:#40015a; '>js/prototype.js</span><span style='color:#00c4c4; '>'</span><span style='color:#ff8906; '>></span><span style='color:#fb8400; '>&lt;/</span><span style='color:#e66170; font-weight:bold; '>script</span><span style='color:#fb8400; '>></span>
+<span style='color:#ff8906; '>&lt;</span><span style='color:#e66170; font-weight:bold; '>script</span> type<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>'</span><span style='color:#00c4c4; '>text/javascript</span><span style='color:#00c4c4; '>'</span> src<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>'</span><span style='color:#40015a; '>js/roomzoom.js</span><span style='color:#00c4c4; '>'</span><span style='color:#ff8906; '>></span><span style='color:#fb8400; '>&lt;/</span><span style='color:#e66170; font-weight:bold; '>script</span><span style='color:#fb8400; '>></span>
+<span style='color:#ff8906; '>&lt;</span><span style='color:#e66170; font-weight:bold; '>script</span> type<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"</span><span style='color:#00c4c4; '>text/javascript</span><span style='color:#00c4c4; '>"</span> src<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"</span><span style='color:#00dddd; '>http</span><span style='color:#b060b0; '>:</span><span style='color:#e66170; font-weight:bold; '>//</span><span style='color:#6070ec; '>script.aculo.us</span><span style='color:#40015a; '>/scriptaculous.js</span><span style='color:#00c4c4; '>"</span><span style='color:#ff8906; '>></span><span style='color:#fb8400; '>&lt;/</span><span style='color:#e66170; font-weight:bold; '>script</span><span style='color:#fb8400; '>></span>
+            </pre>
+
+
+            <p>Add roomzoom.css to your header.
+            </p>
+
+            <pre style='color:#d1d1d1;background:#000000;'><span style='color:#ff8906; '>&lt;</span><span style='color:#e66170; font-weight:bold; '>link</span> rel<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"stylesheet"</span> type<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"text/css"</span> href<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"roomzoom.css"</span><span style='color:#ff8906; '>></span>
+            </pre>
+
+
+            <p></p><h2><a name="How_to_use">How to use</a></h2>
+
+            <p>Using RoomZoom is easy,but you need to specify the HTML anchor element,that is going to generate the zoom revealing a portion of the enlarged image.
+            </p>
+
+            <pre style='color:#d1d1d1;background:#000000;'><span style='color:#ff8906; '>&lt;</span><span style='color:#e66170; font-weight:bold; '>a</span> href<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"images/BIGIMAGE.JPG"</span> class<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"MYCLASS"</span> title<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"MYTITLE"</span><span style='color:#ff8906; '>></span>
+     <span style='color:#ff8906; '>&lt;</span><span style='color:#e66170; font-weight:bold; '>img</span> src<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"images/SMALLIMAGE.JPG"</span> title<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"IMAGE TITLE"</span><span style='color:#ff8906; '>></span>
+<span style='color:#ff8906; '>&lt;/</span><span style='color:#e66170; font-weight:bold; '>a</span><span style='color:#ff8906; '>></span>
+            </pre>
+
+
+            <p>The anchor element wraps the small image you would like to zoom.Following this schema the necessary and base elements are:
+            </p>
 
 
 
+
+
+
+            <p></p><ul>
+                <li>SMALLIMAGE.JPG: Represents the small image you would like to zoom.</li>
+                <li>BIGIMAGE.JPG: Represents the big image that RoomZoom will reveal.</li>
+                <li>MYCLASS: Represents the anchor class,that would be used to instantiate the RoomZoom script to all the elements matching this class(you can use an ID as well).</li>
+                <li>MYTITLE/IMAGE TITLE: Anchor title and/or image title that will be used to show the zoom title close to the RoomZoom Window.</li>
+                <li>PAY ATTENTION: The SMALLIMAGE must be a scaled versione of the BIGIMAGE.</li>
+            </ul>
+            Now load the plugin at window load.
+
+
+            <pre style='color:#d1d1d1;background:#000000;'>document<span style='color:#d2cd86; '>.</span>observe<span style='color:#d2cd86; '>(</span><span style='color:#00c4c4; '>'dom:loaded'</span><span style='color:#d2cd86; '>,</span> <span style='color:#e66170; font-weight:bold; '>function</span><span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>{</span>
+                zoom <span style='color:#d2cd86; '>=</span> <span style='color:#e66170; font-weight:bold; '>new</span> RoomZoom<span style='color:#d2cd86; '>(</span>$<span style='color:#d2cd86; '>(</span><span style='color:#00c4c4; '>'zoomer'</span><span style='color:#d2cd86; '>)</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+            <span style='color:#b060b0; '>}</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+            </pre>
+
+            <p>This will instantiate RoomZoom in default(standard) mode.You can pass more options(Documentation section),to create special or custom effects as in the example below.
+            </p>
+
+            <pre style='color:#d1d1d1;background:#000000;'>document<span style='color:#d2cd86; '>.</span>observe<span style='color:#d2cd86; '>(</span><span style='color:#00c4c4; '>'dom:loaded'</span><span style='color:#d2cd86; '>,</span> <span style='color:#e66170; font-weight:bold; '>function</span><span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>{</span>
+                zoom <span style='color:#d2cd86; '>=</span> <span style='color:#e66170; font-weight:bold; '>new</span> RoomZoom<span style='color:#d2cd86; '>(</span>$<span style='color:#d2cd86; '>(</span><span style='color:#00c4c4; '>'zoomer'</span><span style='color:#d2cd86; '>)</span><span style='color:#d2cd86; '>,</span> <span style='color:#b060b0; '>{</span>
+                    alwaysOn <span style='color:#b060b0; '>:</span> <span style='color:#0f4d75; '>false</span><span style='color:#d2cd86; '>,</span>
+                    zoomWidth<span style='color:#b060b0; '>:</span> <span style='color:#008c00; '>250</span><span style='color:#d2cd86; '>,</span>
+                    zoomHeight<span style='color:#b060b0; '>:</span><span style='color:#008c00; '>200</span><span style='color:#d2cd86; '>,</span>
+                    position<span style='color:#b060b0; '>:</span><span style='color:#00c4c4; '>'left'</span><span style='color:#d2cd86; '>,</span>
+                    xOffset<span style='color:#b060b0; '>:</span> <span style='color:#008c00; '>30</span><span style='color:#d2cd86; '>,</span>
+                    yOffset<span style='color:#b060b0; '>:</span><span style='color:#008c00; '>80</span><span style='color:#d2cd86; '>,</span>
+                    zoomType<span style='color:#b060b0; '>:</span> <span style='color:#00c4c4; '>'reverse'</span>
+                    <span style='color:#9999a9; '>// More Options</span>
+                    <span style='color:#d2cd86; '>.</span><span style='color:#d2cd86; '>.</span><span style='color:#d2cd86; '>.</span>
+                <span style='color:#b060b0; '>}</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+            <span style='color:#b060b0; '>}</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+            </pre>
+
+
+            <p></p><h2><a name="Configuration_options">Configuration options</a></h2>
+
+            <p>Style customizations are obviously admitted simply changing the right parameters value in the jqzoom stylesheet file.
+            </p>
+            <p></p><table border="1" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>
+                        Option name
+                    </th>
+                    <th>
+                        Default value
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        zoomType
+                    </td>
+                    <td class="td-value">
+                        'standard'
+                    </td>
+                    <td>
+                        Zoom type. The others admitted option values are 'reverse','drag','innerzoom'.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        zoomWidth
+                    </td>
+                    <td class="td-value">
+                        300
+                    </td>
+                    <td>
+                        The popup window width showing the zoomed area.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        zoomHeight
+                    </td>
+                    <td class="td-value">
+                        300
+                    </td>
+                    <td>
+                        The popup window height showing the zoomed area.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        xOffset
+                    </td>
+                    <td class="td-value">
+                        10
+                    </td>
+                    <td>
+                        The popup window x offset from the small image. (always positive to move the popup window more on the right if position is "right" or more on the left if position is "left")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        yOffset
+                    </td>
+                    <td class="td-value">
+                        0
+                    </td>
+                    <td>
+                        The popup window y offset from the small image. (always positive to move the popup window more on the top if position is "top" or more on the bottom if position is "bottom")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        position
+                    </td>
+                    <td class="td-value">
+                        'right'
+                    </td>
+                    <td>
+                        The popup window y offset from the small image. (always positive to move the popup window more on the top if position is "top" or more on the bottom if position is "bottom")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        preloadImages
+                    </td>
+                    <td class="td-value">
+                        true
+                    </td>
+                    <td>
+                        if set to true, RoomZoom will preload large images.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        preloadText
+                    </td>
+                    <td class="td-value">
+                        'Loading zoom'
+                    </td>
+                    <td>
+                        The text to show while preloading images.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        title
+                    </td>
+                    <td class="td-value">
+                        true
+                    </td>
+                    <td>
+                        Show a small title over the zoomed window it can be the anchor title and if not specified,it will get the small image title.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        lens
+                    </td>
+                    <td class="td-value">
+                        true
+                    </td>
+                    <td>
+                        if set to false,the small lens,over the image, won't show.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        imageOpacity
+                    </td>
+                    <td class="td-value">
+                        0.4
+                    </td>
+                    <td>
+                        Set the image opacity when the 'zoomType' option is set to 'reverse.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        showEffect
+                    </td>
+                    <td class="td-value">
+                        'show'
+                    </td>
+                    <td>
+                        The effect by which showing the popup window.Options available: 'show' ,'fadein'. To use 'fadein' effect, please add scriptaculous library.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        hideEffect
+                    </td>
+                    <td class="td-value">
+                        'show'
+                    </td>
+                    <td>
+                        The effect by which hiding the popup window.Options available: 'hide' ,'fadeout'.. To use 'fadeout' effect, please add scriptaculous library.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        fadeinSpeed
+                    </td>
+                    <td class="td-value">
+                        '0,5'
+                    </td>
+                    <td>
+                        Changes fade in speed,in case the showEffect option is set to 'fadein'. Integer values in seconds.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        fadeoutSpeed
+                    </td>
+                    <td class="td-value">
+                        '0,5'
+                    </td>
+                    <td>
+                        Changes fade out speed,in case the hideEffect option is set to 'fadeout'. Integer values in seconds.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        smoothing
+                    </td>
+                    <td class="td-value">
+                        true
+                    </td>
+                    <td>
+                        Use zoom movements smoothing (true/false)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        smoothingSpeed
+                    </td>
+                    <td class="td-value">
+                        40
+                    </td>
+                    <td>
+                        Smoothing speed from 1 to 99.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        thumbnailChange
+                    </td>
+                    <td class="td-value">
+                        'click'
+                    </td>
+                    <td>
+                        Method to switch between multiple images. Available values are 'click' and 'mouseover'.
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
             <h2>Authors</h2>
             <p>Denis Obukhov (denis.obukhov@oggettoweb.com)
@@ -110,6 +408,7 @@
             <h2>Contact</h2>
             <p>Denis (denis.obukhov@oggettoweb.com)
                 <br/>      </p>
+            <p>Marco Renzi (http://www.mind-projects.it)</p>
 
 
             <h2>Download</h2>
