@@ -163,7 +163,7 @@ RoomZoom.prototype = {
                 $obj.pos.r = $obj.w + $obj.pos.l;
                 $obj.pos.b = $obj.h + $obj.pos.t;
                 $obj.rightlimit = image[0].cumulativeOffset()[0] + $obj.ow;
-                $obj.bottomlimit = image[0].cumulativeOffset()[1].top + $obj.oh;
+                $obj.bottomlimit = image[0].cumulativeOffset()[1] + $obj.oh;
             };
             this.node.onerror = function () {
                 alert('Problems while loading image.');
@@ -564,7 +564,7 @@ RoomZoom.prototype = {
             };
             this.setposition = function () {
                 var left = -el.scale.x * (lens.getoffset().left - smallimage.bleft + 1);
-                var top = -el.scale.y * (lens.getoffset().top - smallimage.btop + 10);
+                var top = -el.scale.y * (lens.getoffset().top - smallimage.btop + 1);
                 left = Math.round(left);
                 top = Math.round(top);
                 if(settings.smoothing == false) {
