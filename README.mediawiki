@@ -1,8 +1,10 @@
 = First Ever Zoom Image Plugin for Prototype Framework =
 
-Based on jQzoom Evolution Library v2.3 by Marco Renzi (http://www.mind-projects.it). Licensed under the BSD license.
+Based on jQzoom Evolution Library v2.3 by Marco Renzi (http://www.mind-projects.it). Licensed under the BSD license. This module uses Prototype javascript Framework to create amazing zooming effects such as popup zoom, inner image zoom, zoom with reverse opacity and zoom in drag mode. Unlike other plugins RoomZoom.js can use smoothing motion effect with customisable speed. You can easily combine multiple images to a gallery. And you can use multiple galleries on a one page specifing which gallery each image belongs to. RoomZoom.js is very configurable and customisable with many available parameters.
 
 [[File:http://i.imgur.com/vodvJ.png|Zoom example]]
+
+To see demo please visit [[http://roomine.github.com/RoomZoom.js/|github demo page]].
 
 == Installation ==
 
