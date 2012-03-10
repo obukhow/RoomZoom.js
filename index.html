@@ -24,9 +24,10 @@
             h1 .small { font-size: 0.4em; }
             h1 a { text-decoration: none }
             h2 { font-size: 1.5em; color: #72c2ef; }
-            h3 { text-align: center; color: #72c2ef; }
+            h3 { text-align: left; color: #53b5ec; }
             a { color: #72c2ef; }
-            .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+            a.author {color: #53b5ec;}
+            .description { font-size: 1em; margin-bottom: 30px; margin-top: 30px; line-height: 1.5em;}
             .download { float: right; }
             pre { background: #000; color: #fff; padding: 15px;}
             hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
@@ -68,19 +69,58 @@
                 First ever Zoom Image Plugin for Prototype Framework.
                 <small>Based on jQzoom Evolution Library v2.3 by Marco Renzi (http://www.mind-projects.it), licensed under the BSD license.
                 </small>
+                This module uses Prototype javascript Framework to create amazing zooming effects such as popup zoom, inner image zoom, zoom with reverse opacity and zoom in drag mode. Unlike other plugins RoomZoom.js can use smoothing motion effect with customisable speed.
+                You can easily combine multiple images to a gallery. And you can use multiple galleries on a one page specifing which gallery each image belongs to.
+                RoomZoom.js is very configurable and customisable with <a href="#Configuration_options">many available parameters</a>.
             </div>
-
+            
+            <h2>Demo</h2>
+            
             <script type="text/javascript">
 
                 document.observe('dom:loaded', function(){
-                    zoom = new RoomZoom($('zoomer'), {
-                        alwaysOn : false,
-                        zoomWidth: 316,  
-                        zoomHeight:255,  
+                    var zoom = new RoomZoom($('zoomer'), {
+                        zoomWidth      : 316,  
+                        zoomHeight     : 255,  
                         thumbnailChange: 'mouseover',
+                        showEffect     : 'fadein',
+                        hideEffect     : 'fadeout'
+                    });
+                    
+                    var reversezoom = new RoomZoom($('reversezoomer'), {
+                        alwaysOn   : false,
                         showEffect : 'fadein',
-                        hideEffect: 'fadeout',
-           
+                        hideEffect : 'fadeout',
+                        zoomType   : 'reverse'
+                    });
+                    
+                    var innerzoom = new RoomZoom($('innerzoomer'), {
+                        zoomType : 'innerzoom',
+                        title    : false
+                    });
+                    
+                    var dragzoom = new RoomZoom($('dragzoomer'), {
+                        zoomWidth : 316,  
+                        zoomHeight: 278,  
+                        zoomType  : 'drag',
+                        title     : false
+                    });
+                    
+                    var onzoom = new RoomZoom($('onzoomer'), {
+                        zoomWidth : 316,  
+                        zoomHeight: 255,
+                        alwaysOn  : true,
+                        title     : false
+                    });
+                    
+                    var customzoom = new RoomZoom($('customzoomer'), {
+                        zoomWidth : 316,  
+                        zoomHeight: 255,  
+                        position  :'left',  
+                        xOffset   : 30,  
+                        yOffset   : 80,
+                        smoothing : false,
+                        title     : false
                     });
 	
                 });
@@ -88,7 +128,7 @@
 
             </script>
 
-
+            <h3>1. Standard Zoom With Thumbnails</h3>
             <div class="clearfix" id="content">
                 <div class="clearfix">
                     <a href="images/triumph_big1.jpg" id="zoomer" rel='gal1'  title="triumph" >
@@ -104,7 +144,50 @@
                     </ul>
                 </div>
             </div>
-
+            <h3>2. Reverse Zoom</h3>
+            <div class="clearfix" id="content">
+                <div class="clearfix">
+                    <a href="images/ked.jpg" id="reversezoomer" title="triumph" >
+                        <img src="images/ked_thumb.jpg"  title="triumph"  style="border: 4px solid #72c2ef;">
+                    </a>
+                </div>
+            </div>
+            
+            <h3>3. Inner Zoom</h3>
+            <div class="clearfix" id="content">
+                <div class="clearfix">
+                    <a href="images/snake.jpg" id="innerzoomer" title="Snake inner image zoom for Prototype javascript framework" >
+                        <img src="images/snake_thumb.jpg"  title="Snake inner image zoom for Prototype javascript framework"  style="border: 4px solid #72c2ef;">
+                    </a>
+                </div>
+            </div>
+            
+            <h3>4. Drag Zoom</h3>
+            <div class="clearfix" id="content">
+                <div class="clearfix">
+                    <a href="images/camera.jpg" id="dragzoomer" title="Sony NEX 5N Image Zoom for Prototype" >
+                        <img src="images/camera_thumb.jpg"  title="Sony NEX 5N Image Zoom for Prototype"  style="border: 4px solid #72c2ef;">
+                    </a>
+                </div>
+            </div>
+            
+            <h3>4. Always On Zoom</h3>
+            <div class="clearfix" id="content">
+                <div class="clearfix">
+                    <a href="images/dress.jpg" id="onzoomer" title="Beautiful dress zoom" >
+                        <img src="images/dress_thumb.jpg"  title="Beautiful dress zoom"  style="border: 4px solid #72c2ef;">
+                    </a>
+                </div>
+            </div>
+            
+            <h3>6. Zoom With Custom Position, Without Effects and Smoothing</h3>
+            <div class="clearfix" id="content">
+                <div class="clearfix">
+                    <a href="images/ked_2.jpg" id="customzoomer" title="Bobs Women shoes with prototype framework" >
+                        <img src="images/ked_2_thumb.jpg"  title="Bobs Women shoes with prototype framework"  style="border: 4px solid #72c2ef;">
+                    </a>
+                </div>
+            </div>
 
             <h2><a name="Installation">Installation</a></h2>
 
@@ -179,7 +262,7 @@
             </pre>
 
 
-            <p></p><h2><a name="Configuration_options">Configuration options</a></h2>
+            <p></p><h2><a name="Configuration_options">Configuration Options</a></h2>
 
             <p>Style customizations are obviously admitted simply changing the right parameters value in the jqzoom stylesheet file.
             </p>
@@ -400,9 +483,9 @@
             </table>
 
             <h2>Authors</h2>
-            <p>Denis Obukhov (<a href="mailto:denis.obukhov@oggettoweb.com">denis.obukhov@oggettoweb.com</a>)
+            <p><a href="http://oggettoweb.com/" class="author">Denis Obukhov</a> (<a href="mailto:denis.obukhov@oggettoweb.com">denis.obukhov@oggettoweb.com</a>)
                 <br/>      </p>
-            <p>Marco Renzi (<a href="http://www.mind-projects.it">http://www.mind-projects.it</a>)</p>
+            <p><a href="http://www.mind-projects.it" class="author">Marco Renzi</a></p>
 
 
             <h2>Download</h2>
