@@ -109,17 +109,21 @@ Style customizations are obviously admitted simply changing the right parameters
 |true
 |if set to false,the small lens,over the image, won't show.
 |-
+|opacity
+|0.5
+|Hover area opacity.
+|-
 |imageOpacity
 |0.4
 |Set the image opacity when the 'zoomType' option is set to 'reverse.
 |-
 |showEffect
 |'show'
-|The effect by which showing the popup window.Options available: 'show' ,'fadein'. To use 'fadein' effect, please add scriptaculous library.
+|The effect by which showing the popup window.Options available: 'show', 'fadein'. To use 'fadein' effect, please add scriptaculous library.
 |-
 |hideEffect
 |'show'
-|The effect by which hiding the popup window.Options available: 'hide' ,'fadeout'.. To use 'fadeout' effect, please add scriptaculous library.
+|The effect by which hiding the popup window.Options available: 'hide', 'fadeout'. To use 'fadeout' effect, please add scriptaculous library.
 |-
 |fadeinSpeed
 |0.5
@@ -151,7 +155,7 @@ Style customizations are obviously admitted simply changing the right parameters
 |-
 |hintPosition
 |'bl'
-|Hint position on image, i.e. top-left, bottom-center, top-right, etc. Can be tl/tr/tc/bl/br/bc.
+|Hint position on image, i.e. top-left, bottom-center, top-right, etc. Can be tl / tr / tc / bl / br / bc.
 |-
 |hintOpacity
 |0.75

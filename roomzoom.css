@@ -37,7 +37,7 @@
 }
 .zoomPreload {
     background-color: white;
-    background-image: url("../images/zoomloader.gif");
+    background-image: url("images/zoomloader.gif");
     background-position: 43px 30px;
     background-repeat: no-repeat;
     border: 1px solid #CCCCCC;
@@ -59,7 +59,6 @@
     background-color: #FFFFFF;
     border: 1px solid #CCCCCC;
     cursor: crosshair;
-    opacity: 0.6;
     overflow: hidden;
     position: absolute;
     z-index: 101;
@@ -122,10 +121,10 @@
     z-index: -1;
 }
 .zoomHint {
-    background:url(images/zoom-ico.png) 0 center no-repeat;
+    background:url('images/zoom-ico.png') 0 center no-repeat;
     padding: 2px 2px 2px 25px !important;
     height: 18px;
-    margin: 0;
+    margin: 5px;
     text-decoration: none;
     text-align: left;
     font:normal 11px/18px Arial,Helvetica,sans-serif;
