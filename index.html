@@ -45,7 +45,7 @@
             table tr {border:none; border-bottom: 1px solid #72c2ef;}
             table thead th, table tr td{padding: 10px 7px 10px 7px; border:none;}
             table thead th { text-transform: capitalize; font-size: 1.1em; font-weight: normal; font-variant: small-caps;}
-/*            table tr:nth-child(2n) {background-color: #edf9ff; }*/
+            /*            table tr:nth-child(2n) {background-color: #edf9ff; }*/
             .td-value {width: 140px; font-family: monospace; border-left: 1px dashed #72C2EF; border-right: 1px dashed #72C2EF;}
             th.td-value {font-family: sans-serif;}
         </style>
@@ -74,9 +74,9 @@
                 You can easily combine multiple images to a gallery. And you can use multiple galleries on a one page specifing which gallery each image belongs to.
                 RoomZoom.js is very configurable and customisable with <a href="#Configuration_options">many available parameters</a>.
             </div>
-            
+
             <h2>Demo</h2>
-            
+
             <script type="text/javascript">
 
                 document.observe('dom:loaded', function(){
@@ -121,7 +121,9 @@
                         xOffset   : 30,  
                         yOffset   : 80,
                         smoothing : false,
-                        title     : false
+                        title     : false,
+                        hintText  : 'Move a mouse over to zoom'
+
                     });
 	
                 });
@@ -153,7 +155,7 @@
                     </a>
                 </div>
             </div>
-            
+
             <h3>3. Inner Zoom</h3>
             <div class="clearfix" id="content">
                 <div class="clearfix">
@@ -162,7 +164,7 @@
                     </a>
                 </div>
             </div>
-            
+
             <h3>4. Drag Zoom</h3>
             <div class="clearfix" id="content">
                 <div class="clearfix">
@@ -171,7 +173,7 @@
                     </a>
                 </div>
             </div>
-            
+
             <h3>4. Always On Zoom</h3>
             <div class="clearfix" id="content">
                 <div class="clearfix">
@@ -180,8 +182,8 @@
                     </a>
                 </div>
             </div>
-            
-            <h3>6. Zoom With Custom Position, Without Effects and Smoothing</h3>
+
+            <h3>6. Zoom With Custom Position, Hint Text, Without Effects and Smoothing</h3>
             <div class="clearfix" id="content">
                 <div class="clearfix">
                     <a href="images/ked_2.jpg" id="customzoomer" title="Bobs Women shoes with prototype framework" >
@@ -269,217 +271,261 @@
             </p>
             <p></p><table border="1" cellspacing="0">
                 <thead>
-                <tr>
-                    <th>
-                        Option name
-                    </th>
-                    <th class="td-value">
-                        Default value
-                    </th>
-                    <th>
-                        Description
-                    </th>
-                </tr>
+                    <tr>
+                        <th>
+                            Option name
+                        </th>
+                        <th class="td-value">
+                            Default value
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        zoomType
-                    </td>
-                    <td class="td-value">
-                        'standard'
-                    </td>
-                    <td>
-                        Zoom type. The others admitted option values are 'reverse', 'drag' and 'innerzoom'.
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        zoomWidth
-                    </td>
-                    <td class="td-value">
-                        300
-                    </td>
-                    <td>
-                        The popup window width showing the zoomed area.
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        zoomHeight
-                    </td>
-                    <td class="td-value">
-                        300
-                    </td>
-                    <td>
-                        The popup window height showing the zoomed area.
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        xOffset
-                    </td>
-                    <td class="td-value">
-                        10
-                    </td>
-                    <td>
-                        The popup window x offset from the small image. (always positive to move the popup window more on the right if position is "right" or more on the left if position is "left")
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        yOffset
-                    </td>
-                    <td class="td-value">
-                        0
-                    </td>
-                    <td>
-                        The popup window y offset from the small image. (always positive to move the popup window more on the top if position is "top" or more on the bottom if position is "bottom")
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        position
-                    </td>
-                    <td class="td-value">
-                        'right'
-                    </td>
-                    <td>
-                        The popup window y offset from the small image. (always positive to move the popup window more on the top if position is "top" or more on the bottom if position is "bottom")
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        preloadImages
-                    </td>
-                    <td class="td-value">
-                        true
-                    </td>
-                    <td>
-                        if set to true, RoomZoom will preload large images.
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        preloadText
-                    </td>
-                    <td class="td-value">
-                        'Loading zoom'
-                    </td>
-                    <td>
-                        The text to show while preloading images.
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        title
-                    </td>
-                    <td class="td-value">
-                        true
-                    </td>
-                    <td>
-                        Show a small title over the zoomed window it can be the anchor title and if not specified,it will get the small image title.
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        lens
-                    </td>
-                    <td class="td-value">
-                        true
-                    </td>
-                    <td>
-                        if set to false,the small lens,over the image, won't show.
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        imageOpacity
-                    </td>
-                    <td class="td-value">
-                        0.4
-                    </td>
-                    <td>
-                        Set the image opacity when the 'zoomType' option is set to 'reverse.
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        showEffect
-                    </td>
-                    <td class="td-value">
-                        'show'
-                    </td>
-                    <td>
-                        The effect by which showing the popup window.Options available: 'show' ,'fadein'. To use 'fadein' effect, please add scriptaculous library.
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        hideEffect
-                    </td>
-                    <td class="td-value">
-                        'show'
-                    </td>
-                    <td>
-                        The effect by which hiding the popup window.Options available: 'hide' ,'fadeout'.. To use 'fadeout' effect, please add scriptaculous library.
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        fadeinSpeed
-                    </td>
-                    <td class="td-value">
-                        '0,5'
-                    </td>
-                    <td>
-                        Changes fade in speed,in case the showEffect option is set to 'fadein'. Integer values in seconds.
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        fadeoutSpeed
-                    </td>
-                    <td class="td-value">
-                        '0,5'
-                    </td>
-                    <td>
-                        Changes fade out speed,in case the hideEffect option is set to 'fadeout'. Integer values in seconds.
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        smoothing
-                    </td>
-                    <td class="td-value">
-                        true
-                    </td>
-                    <td>
-                        Use zoom movements smoothing (true/false)
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        smoothingSpeed
-                    </td>
-                    <td class="td-value">
-                        40
-                    </td>
-                    <td>
-                        Smoothing speed from 1 to 99.
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        thumbnailChange
-                    </td>
-                    <td class="td-value">
-                        'click'
-                    </td>
-                    <td>
-                        Method to switch between multiple images. Available values are 'click' and 'mouseover'.
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            zoomType
+                        </td>
+                        <td class="td-value">
+                            'standard'
+                        </td>
+                        <td>
+                            Zoom type. The others admitted option values are 'reverse', 'drag' and 'innerzoom'.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            zoomWidth
+                        </td>
+                        <td class="td-value">
+                            300
+                        </td>
+                        <td>
+                            The popup window width showing the zoomed area.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            zoomHeight
+                        </td>
+                        <td class="td-value">
+                            300
+                        </td>
+                        <td>
+                            The popup window height showing the zoomed area.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            xOffset
+                        </td>
+                        <td class="td-value">
+                            10
+                        </td>
+                        <td>
+                            The popup window x offset from the small image. (always positive to move the popup window more on the right if position is "right" or more on the left if position is "left")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            yOffset
+                        </td>
+                        <td class="td-value">
+                            0
+                        </td>
+                        <td>
+                            The popup window y offset from the small image. (always positive to move the popup window more on the top if position is "top" or more on the bottom if position is "bottom")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            position
+                        </td>
+                        <td class="td-value">
+                            'right'
+                        </td>
+                        <td>
+                            The popup window y offset from the small image. (always positive to move the popup window more on the top if position is "top" or more on the bottom if position is "bottom")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            preloadImages
+                        </td>
+                        <td class="td-value">
+                            true
+                        </td>
+                        <td>
+                            if set to true, RoomZoom will preload large images.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            preloadText
+                        </td>
+                        <td class="td-value">
+                            'Loading zoom'
+                        </td>
+                        <td>
+                            The text to show while preloading images.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            title
+                        </td>
+                        <td class="td-value">
+                            true
+                        </td>
+                        <td>
+                            Show a small title over the zoomed window it can be the anchor title and if not specified,it will get the small image title.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            lens
+                        </td>
+                        <td class="td-value">
+                            true
+                        </td>
+                        <td>
+                            if set to false,the small lens,over the image, won't show.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            imageOpacity
+                        </td>
+                        <td class="td-value">
+                            0.4
+                        </td>
+                        <td>
+                            Set the image opacity when the 'zoomType' option is set to 'reverse.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            showEffect
+                        </td>
+                        <td class="td-value">
+                            'show'
+                        </td>
+                        <td>
+                            The effect by which showing the popup window.Options available: 'show' ,'fadein'. To use 'fadein' effect, please add scriptaculous library.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            hideEffect
+                        </td>
+                        <td class="td-value">
+                            'show'
+                        </td>
+                        <td>
+                            The effect by which hiding the popup window.Options available: 'hide' ,'fadeout'.. To use 'fadeout' effect, please add scriptaculous library.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            fadeinSpeed
+                        </td>
+                        <td class="td-value">
+                            0.5
+                        </td>
+                        <td>
+                            Changes fade in speed,in case the showEffect option is set to 'fadein'. Integer values in seconds.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            fadeoutSpeed
+                        </td>
+                        <td class="td-value">
+                            0.5
+                        </td>
+                        <td>
+                            Changes fade out speed,in case the hideEffect option is set to 'fadeout'. Integer values in seconds.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            smoothing
+                        </td>
+                        <td class="td-value">
+                            true
+                        </td>
+                        <td>
+                            Use zoom movements smoothing (true/false)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            smoothingSpeed
+                        </td>
+                        <td class="td-value">
+                            40
+                        </td>
+                        <td>
+                            Smoothing speed from 1 to 99.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            thumbnailChange
+                        </td>
+                        <td class="td-value">
+                            'click'
+                        </td>
+                        <td>
+                            Method to switch between multiple images. Available values are 'click' and 'mouseover'.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            hint
+                        </td>
+                        <td class="td-value">
+                            true
+                        </td>
+                        <td>
+                            Show a tip with suggestion that image is zoomable.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            hintText
+                        </td>
+                        <td class="td-value">
+                            'Zoom'
+                        </td>
+                        <td>
+                            Text of the hint. Can be empty to show only icon.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            hintPosition
+                        </td>
+                        <td class="td-value">
+                            'bl'
+                        </td>
+                        <td>
+                            Hint position on image, i.e. top-left, bottom-center, top-right, etc. Can be tl / tr / tc / bl / br / bc.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            hintOpacity
+                        </td>
+                        <td class="td-value">
+                            0.75
+                        </td>
+                        <td>
+                            Opacity of the hint. Decimal value from 0 to 1.
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
