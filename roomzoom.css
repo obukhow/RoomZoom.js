@@ -3,12 +3,12 @@
  * RoomZoom.js Javascript Image Zoom Plugin for Prototype framework
  *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
- * 
+ *
  * DISCLAIMER
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,7 +28,7 @@
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @author     Denis Obukhov <denis.obukhov@oggettoweb.com>
  */
- 
+
 .zoomPad {
     cursor: crosshair;
     float: left;
@@ -120,4 +120,15 @@
     opacity: 0.8;
     position: absolute;
     z-index: -1;
+}
+.zoomHint {
+    background:url(images/zoom-ico.png) 0 center no-repeat;
+    padding: 0 0 0 25px !important;
+    height: 18px;
+    margin: 0 0 3px 8px;
+    text-decoration: none;
+    text-align: left;
+    font:normal 11px/18px Arial,Helvetica,sans-serif;
+    color: #646464;
+    cursor:pointer;
 }

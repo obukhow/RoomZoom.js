@@ -98,6 +98,7 @@ RoomZoom.prototype = {
         var stage = this.stage = new Stage();
         var largeimage = this.largeimage = new Largeimage();
         var loader = this.loader = new Loader();
+        var hint = this.hint = new Hint();
         //preventing default click,allowing the onclick event [exmple: lightbox]
         $(el).observe('click', function (e) {
             e.preventDefault();
@@ -620,6 +621,34 @@ RoomZoom.prototype = {
             };
             return this;
         };
+
+        function Hint() {
+            var $obj = this;
+            this.node = new Element('div', ({'class' : 'zoomHint'}));
+            this.node.setStyle({
+                'overflow': 'hidden',
+                'position': 'absolute',
+                'z-index': 1,
+                'right': 'auto',
+                'top': 'auto',
+                'max-width': '316px',
+                'left': '2px',
+                'bottom': '2px'
+            });
+            this.node.setOpacity(0.75);
+            this.node.update('Zoom');
+
+            this.append = function() {
+                $('zoomPad' + obj.el.rel).appendChild(this.node);
+            }
+
+            this.hide = function(){
+                this.node.hide();
+            }
+            this.show = function() {
+                this.node.show();
+            }
+        }
         if (img[0].complete) {
             //fetching data from sallimage if was previously loaded
             smallimage.fetchdata();
@@ -655,6 +684,7 @@ RoomZoom.prototype = {
         if (this.settings.preloadImages || this.settings.zoomType == 'drag' || this.settings.alwaysOn) {
             this.load();
         }
+        this.hint.append();
         this.init();
     },
     init: function () {
@@ -758,6 +788,7 @@ RoomZoom.prototype = {
         //show lens and zoomWindow
         this.lens.show();
         this.stage.show();
+        this.hint.hide();
     },
     deactivate: function (e) {
         switch (this.settings.zoomType) {
@@ -775,6 +806,7 @@ RoomZoom.prototype = {
                 }
                 break;
         }
+        this.hint.show();
         this.el.zoom_active = false;
     },
     swapimage: function (link) {
