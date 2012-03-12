@@ -122,12 +122,12 @@ Style customizations are obviously admitted simply changing the right parameters
 |The effect by which hiding the popup window.Options available: 'hide' ,'fadeout'.. To use 'fadeout' effect, please add scriptaculous library.
 |-
 |fadeinSpeed
-|'0,5'
-|Changes fade in speed,in case the showEffect option is set to 'fadein'. Integer values in seconds.
+|0.5
+|Changes fade in speed,in case the showEffect option is set to 'fadein'. Decimal values in seconds.
 |-
 |fadeoutSpeed
-|'0,5'
-|Changes fade out speed,in case the hideEffect option is set to 'fadeout'. Integer values in seconds.
+|0.5
+|Changes fade out speed,in case the hideEffect option is set to 'fadeout'. Decimal values in seconds.
 |-
 |smoothing
 |true
@@ -140,4 +140,20 @@ Style customizations are obviously admitted simply changing the right parameters
 |thumbnailChange
 |'click'
 |Method to switch between multiple images. Available values are 'click' and 'mouseover'.
+|-
+|hint
+|true
+|Show a tip with suggestion that image is zoomable.
+|-
+|hintText
+|'Zoom'
+|Text of the hint. Can be empty to show only icon.
+|-
+|hintPosition
+|'bl'
+|Hint position on image, i.e. top-left, bottom-center, top-right, etc. Can be tl/tr/tc/bl/br/bc.
+|-
+|hintOpacity
+|0.75
+|Opacity of the hint. Decimal value from 0 to 1.
 |}

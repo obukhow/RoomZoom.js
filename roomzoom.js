@@ -56,15 +56,21 @@ RoomZoom.prototype = {
             //show/fadein
             hideEffect: 'hide',
             //hide/fadeout
-            fadeinSpeed: '0.5',
+            fadeinSpeed: 0.5,
             //fast/slow/number
-            fadeoutSpeed: '0.5',
+            fadeoutSpeed: 0.5,
             //smothing speed from 1 to 99
             smoothingSpeed : 40,
             // use smoothing
             smoothing : true,
             // thumbnails switching method
-            thumbnailChange: 'click'
+            thumbnailChange: 'click',
+            // enable/disable hint
+            hint : true,
+            hintText : 'Zoom',
+            hintOpacity : 0.75,
+            // hint position tl / tr / tc / bl / br / bc
+            hintPosition : 'bl'
         }, settings || {});
         var obj;
         this.obj = obj = this;
@@ -626,27 +632,55 @@ RoomZoom.prototype = {
             var $obj = this;
             this.node = new Element('div', ({'class' : 'zoomHint'}));
             this.node.setStyle({
-                'overflow': 'hidden',
-                'position': 'absolute',
-                'z-index': 1,
-                'right': 'auto',
-                'top': 'auto',
-                'max-width': '316px',
-                'left': '2px',
-                'bottom': '2px'
+                'overflow' : 'hidden',
+                'position' : 'absolute',
+                'zIndex'   : 1,
+                'right'    : 'auto',
+                'top'      : 'auto',
+                'left'     : 'auto',
+                'bottom'   : 'auto',
+                'max-width': obj.largeimage.node.getWidth() - 5 + 'px'
             });
-            this.node.setOpacity(0.75);
-            this.node.update('Zoom');
+            this.appended = false;
 
             this.append = function() {
-                $('zoomPad' + obj.el.rel).appendChild(this.node);
+                if (settings.hintText) {
+                    this.node.update(settings.hintText);
+                }
+                this.node.setOpacity(settings.hintOpacity);
+                el.zoomPad.appendChild(this.node);
+                var position = new String(settings.hintPosition).toArray()
+                switch (position[0]) {
+                    case 't' :
+                        this.node.setStyle({'top' : '2px'});
+                        break;
+                    default :
+                        this.node.setStyle({'bottom' : '2px'});
+                        
+                }
+                switch (position[1]) {
+                    case 'c' :
+                        this.node.setStyle({'left' : Math.round((el.zoomPad.getWidth() - this.node.getWidth()) / 2) + 'px'});
+                        break;
+                    case 'r' :
+                        this.node.setStyle({'right' : '4px'});
+                        break;
+                    default :
+                        this.node.setStyle({'left' : '4px'});
+                        
+                }
+                this.appended = true;
             }
 
             this.hide = function(){
-                this.node.hide();
+                if (this.appended) {
+                    this.node.hide();
+                }
             }
             this.show = function() {
-                this.node.show();
+                if (this.appended) {
+                    this.node.show();
+                }
             }
         }
         if (img[0].complete) {
@@ -684,7 +718,9 @@ RoomZoom.prototype = {
         if (this.settings.preloadImages || this.settings.zoomType == 'drag' || this.settings.alwaysOn) {
             this.load();
         }
-        this.hint.append();
+        if (this.settings.hint) {
+            this.hint.append();
+        }
         this.init();
     },
     init: function () {
@@ -746,7 +782,7 @@ RoomZoom.prototype = {
             if (regex.test(rel)) {
                 return link;
             }
-        });
+        }.bind(this));
         // @todo: fix this shit
         // if (thumblist.length > 0) {
         // //getting the first to the last
