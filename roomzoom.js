@@ -70,7 +70,10 @@ RoomZoom.prototype = {
         this.obj = obj = this;
         this.settings = settings;
         this.obj.el = this.el = el;
-        //multiple page galleries
+        this.timer = null;
+        this.activated = false;
+        this.visible = false;
+        //multitiple page galleries
         this.el.rel = ($(el).readAttribute('rel')) ? ($(el).readAttribute('rel')) : this._randomString(4);
         //ANCHOR ELEMENT
         el.zoom_active = false;
@@ -364,13 +367,13 @@ RoomZoom.prototype = {
             }));
             this.node.update('<div id="zoomWrapper' + obj.el.rel + '" class="zoomWrapper"><div id="zoomWrapperTitle' + obj.el.rel + '" class="zoomWrapperTitle"></div><div id="zoomWrapperImage' + obj.el.rel + '" class="zoomWrapperImage"></div></div>')
             this.ieframe = new Element('iframe', ({
-                'id':'zoomIframe' +  + obj.el.rel, 
-                'class':'zoomIframe' +  + obj.el.rel, 
-                'src': 'javascript:\'\';', 
-                'marginwidth':0, 
-                'marginheight':0, 
-                'align':'bottom', 
-                'scrolling':'no', 
+                'id':'zoomIframe' +  + obj.el.rel,
+                'class':'zoomIframe' +  + obj.el.rel,
+                'src': 'javascript:\'\';',
+                'marginwidth':0,
+                'marginheight':0,
+                'align':'bottom',
+                'scrolling':'no',
                 'frameborder':0
             }))
             this.setposition = function () {
@@ -406,31 +409,30 @@ RoomZoom.prototype = {
             this.append = function () {
                 $('zoomPad' + obj.el.rel).appendChild(this.node);
                 this.node.setStyle({
-                    position: 'absolute',
-                    display: 'none',
-                    zIndex: 5001
+                    'position': 'absolute',
+                    'display': 'none',
+                    'zIndex': 5001
                 });
                 if (settings.zoomType == 'innerzoom') {
                     this.node.setStyle({
-                        cursor: 'default'
+                        'cursor': 'default'
                     });
                     var thickness = (smallimage.bleft == 0) ? 1 : smallimage.bleft;
                     $('zoomWrapper' + obj.el.rel).setStyle({
-                        borderWidth: thickness + 'px'
+                        'borderWidth': thickness + 'px'
                     });
                 }
                 $('zoomWrapper' + obj.el.rel).setStyle({
-                    width: Math.round(settings.zoomWidth) + 'px' ,
-                    borderWidth: thickness + 'px'
+                    'width': Math.round(settings.zoomWidth) + 'px'
                 });
                 $('zoomWrapperImage' + obj.el.rel).setStyle({
-                    width: '100%',
-                    height: Math.round(settings.zoomHeight) + 'px'
+                    'width': '100%',
+                    'height': Math.round(settings.zoomHeight) + 'px'
                 });
                 //zoom title
                 $('zoomWrapperTitle' + obj.el.rel).setStyle({
-                    width: '100%',
-                    position: 'absolute'
+                    'width': '100%',
+                    'position': 'absolute'
                 });
                 $('zoomWrapperTitle' + obj.el.rel).hide();
                 if (settings.title && zoomtitle.length > 0) {
@@ -439,6 +441,7 @@ RoomZoom.prototype = {
                 $obj.setposition();
             };
             this.hide = function () {
+                this.visible = false;
                 switch (settings.hideEffect) {
                     case 'fadeout':
                         if (this.effect) {
@@ -461,6 +464,10 @@ RoomZoom.prototype = {
                 this.ieframe.hide();
             };
             this.show = function () {
+                if (this.visible) {
+                    return;
+                }
+                this.activated = this.visible = true;
                 switch (settings.showEffect) {
                     case 'fadein':
                         var from = 0;
@@ -491,13 +498,13 @@ RoomZoom.prototype = {
                     this.ieframe.left = this.node.leftpos;
                     this.ieframe.top = this.node.toppos;
                     this.ieframe.setStyle({
-                        display: 'block',
-                        position: "absolute",
-                        left: this.ieframe.left + 'px',
-                        top: this.ieframe.top + 'px',
-                        zIndex: 99,
-                        width: this.ieframe.width + 'px',
-                        height: this.ieframe.height + 'px'
+                        'display': 'block',
+                        'position': "absolute",
+                        'left': this.ieframe.left + 'px',
+                        'top': this.ieframe.top + 'px',
+                        'zIndex': 99,
+                        'width': this.ieframe.width + 'px',
+                        'height': this.ieframe.height + 'px'
                     });
                     $('zoomPad' + obj.el.rel).appendChild(this.ieframe);
                     this.ieframe.show();
@@ -666,30 +673,24 @@ RoomZoom.prototype = {
                 return false;
             };
             $("zoomPad" + this.el.rel).setStyle({
-                cursor: 'default'
+                'cursor': 'default'
             });
             $("zoomPup" + this.el.rel).setStyle({
-                cursor: 'move'
+                'cursor': 'move'
             });
         }
         if (this.settings.zoomType == 'innerzoom') {
             $("zoomWrapper"  + this.el.rel).setStyle({
-                cursor: 'crosshair'
+                'cursor': 'crosshair'
             });
         }
-        $("zoomPad" + this.el.rel).observe('mouseenter', function (event) {
-            this._drag(event);
-        }.bind(this));
         $("zoomPad" + this.el.rel).observe('mouseover', function (event) {
+            clearTimeout(this.timer);
             this._drag(event);
         }.bind(this));
         $("zoomPad" + this.el.rel).observe('mouseout', function (event) {
             //mouseleave simulation
-            var relatedTarget = $(event.relatedTarget || event.toElement);
-            if (relatedTarget != event.currentTarget && relatedTarget.childOf(event.currentTarget) == false ) {
-                this.deactivate();
-            }
-
+                this.timer = setTimeout(function(){this.deactivate()}.bind(this),20)
         }.bind(this));
         $("zoomPad" + this.el.rel).observe('mousemove', function (e) {
             //prevent fast mouse mevements not to fire the mouseout event
@@ -698,7 +699,7 @@ RoomZoom.prototype = {
                 return false;
             }
             el.zoom_active = true;
-            if (el.largeimageloaded && $('zoomWindow' + this.el.rel).getStyle('visibility') != 'visible') {
+            if (el.largeimageloaded && this.activated) {
                 this.activate(e);
             }
             if (el.largeimageloaded && (settings.zoomType != 'drag' || (settings.zoomType == 'drag' && el.mouseDown))) {
@@ -710,7 +711,7 @@ RoomZoom.prototype = {
         //binding click event on thumbnails
         var thumblist = new Array();
         thumblist = $$('a').findAll(function (link) {
-            var regex = new RegExp("gallery[\\s]*:[\\s]*'" + el.rel.trim() + "'", "i");
+            var regex = new RegExp("gallery[\\s]*:[\\s]*'" + this.trim(el.rel) + "'", "i");
             var rel = link.readAttribute('rel');
             if (regex.test(rel)) {
                 return link;
@@ -800,15 +801,16 @@ RoomZoom.prototype = {
         return (Prototype.Browser.IE && Prototype.BrowserFeatures['Version'] < 7);
     },
     trim : function (str) {
-        return str.trim();
+        var string = new String(str);
+        return string.strip();
     },
 
     _continueMove : function() {
         this.largeimage.setposition()
     },
     _drag : function (event) {
-        var relatedTarget = $(event.relatedTarget || event.toElement);
-        if (relatedTarget != event.currentTarget && (relatedTarget.childOf(event.currentTarget) == false)) {
+//        var relatedTarget = $(event.relatedTarget || event.toElement);
+//        if (relatedTarget != event.currentTarget && (relatedTarget.childOf(event.currentTarget) == false)) {
             this.img[0].writeAttribute('title','');
             this.el.writeAttribute('title','');
             this.el.zoom_active = true;
@@ -819,7 +821,7 @@ RoomZoom.prototype = {
             } else {
                 this.load();
             }
-        }
+//        }
     },
 
     changeZoomType : function(type) {
@@ -834,7 +836,7 @@ RoomZoom.prototype = {
         this.stage.append()
         this.init()
     },
-    
+
     _randomString : function (length) {
         var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('');
 
