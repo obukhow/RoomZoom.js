@@ -638,8 +638,8 @@ RoomZoom.prototype = {
                 'right'    : 'auto',
                 'top'      : 'auto',
                 'left'     : 'auto',
-                'bottom'   : 'auto',
-                'max-width': obj.largeimage.node.getWidth() - 5 + 'px'
+                'bottom'   : 'auto'
+//                'max-width': obj.largeimage.node.getWidth() - 5 + 'px'
             });
             this.appended = false;
 
