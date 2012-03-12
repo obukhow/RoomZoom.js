@@ -59,7 +59,6 @@
     background-color: #FFFFFF;
     border: 1px solid #CCCCCC;
     cursor: crosshair;
-    opacity: 0.6;
     overflow: hidden;
     position: absolute;
     z-index: 101;

@@ -33,6 +33,8 @@ var RoomZoom = new Class.create();
 RoomZoom.prototype = {
     initialize: function (el, settings) {
         settings = Object.extend({
+            //opacity of hovered area
+            opacity  : 0.5,
             zoomType : 'standard',
             //innerzoom/standard/reverse/drag
             zoomWidth: 300,
@@ -256,7 +258,8 @@ RoomZoom.prototype = {
                     'height': this.node.h + 'px',
                     'position': 'absolute',
                     'display': 'none',
-                    'borderWidth': 1 + 'px'
+                    'borderWidth': 1 + 'px',
+                    'opacity'    : settings.opacity
                 });
                 if (settings.zoomType == 'reverse') {
                     this.image.src = smallimage.node.src;
