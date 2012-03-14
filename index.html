@@ -68,7 +68,7 @@
 
             <div class="description">
                 First ever Zoom Image Plugin for Prototype Framework.
-                <small>Based on jQzoom Evolution Library v2.3 by Marco Renzi (http://www.mind-projects.it), licensed under the BSD license.
+                <small>Based on jQzoom Evolution Library v2.3 by Marco Renzi (http://www.mind-projects.it), licensed under the BSD license. Includes modified Lightbox 2 Image gallery  v2.05 by Lokesh Dhakar.
                 </small>
                 This module uses Prototype javascript Framework to create amazing zooming effects such as popup zoom, inner image zoom, zoom with reverse opacity and zoom in drag mode. Unlike other plugins RoomZoom.js can use smoothing motion effect with customisable speed.
                 You can easily combine multiple images to a gallery. And you can use multiple galleries on a one page specifing which gallery each image belongs to.
@@ -128,9 +128,8 @@
 	
                 });
 
-
             </script>
-
+            <div id="gallery_container"></div>
             <h3>1. Standard Zoom With Thumbnails</h3>
             <div class="clearfix" id="content">
                 <div class="clearfix">
@@ -141,9 +140,9 @@
                 <br/>
                 <div class="clearfix" >
                     <ul id="thumblist" class="clearfix" >
-                        <li><a class="zoomThumbActive" href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: 'images/triumph_small1.jpg',largeimage: 'images/triumph_big1.jpg'}"><img src='images/thumbs/triumph_thumb1.jpg'></a></li>
-                        <li><a href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: 'images/triumph_small2.jpg',largeimage: 'images/triumph_big2.jpg'}"><img src='images/thumbs/triumph_thumb2.jpg'></a></li>
-                        <li><a  href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: 'images/triumph_small3.jpg',largeimage: 'images/triumph_big3.jpg'}"><img src='images/thumbs/triumph_thumb3.jpg'></a></li>
+                        <li><a class="zoomThumbActive" href='images/triumph_big1.jpg' rev="images/triumph_small1.jpg" rel="gallery:gal1"><img src='images/thumbs/triumph_thumb1.jpg'></a></li>
+                        <li><a href='images/triumph_big2.jpg' rev="images/triumph_small2.jpg" rel="gallery:gal1"><img src='images/thumbs/triumph_thumb2.jpg'></a></li>
+                        <li><a  href='images/triumph_big3.jpg' rev="images/triumph_small3.jpg" rel="gallery:gal1"><img src='images/thumbs/triumph_thumb3.jpg'></a></li>
                     </ul>
                 </div>
             </div>
@@ -537,13 +536,25 @@
                             Opacity of the hint. Decimal value from 0 to 1.
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            disableExpand
+                        </td>
+                        <td class="td-value">
+                            false
+                        </td>
+                        <td>
+                            Disable expand window with large image.
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
             <h2>Authors</h2>
             <p><a href="http://oggettoweb.com/" class="author">Denis Obukhov</a> (<a href="mailto:denis.obukhov@oggettoweb.com">denis.obukhov@oggettoweb.com</a>)
-                <br/>      </p>
+            </p>
             <p><a href="http://www.mind-projects.it" class="author">Marco Renzi</a></p>
+            <p><a href="http://lokeshdhakar.com/projects/lightbox2/" class="author">Lokesh Dhakar</a></p>
 
 
             <h2>Download</h2>
