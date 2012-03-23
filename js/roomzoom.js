@@ -1,6 +1,6 @@
 
 /**
- * RoomZoom.js Javascript Image Zoom Plugin for Prototype framework
+ * RoomZoom.js v1.2.1 Javascript Image Zoom Plugin for Prototype framework
  *
  * NOTICE OF LICENSE
  *
@@ -112,6 +112,7 @@ RoomZoom.prototype = {
         //preventing default click,allowing the onclick event [exmple: lightbox]
         $(el).observe('click', (function (e) {
             this._expand(e);
+            e.stop();
             e.preventDefault();
             return false;
         }).bindAsEventListener(this));
@@ -662,7 +663,7 @@ RoomZoom.prototype = {
                         break;
                     default :
                         this.node.setStyle({'bottom' : '2px'});
-                        
+
                 }
                 switch (position[1]) {
                     case 'c' :
@@ -673,7 +674,7 @@ RoomZoom.prototype = {
                         break;
                     default :
                         this.node.setStyle({'left' : '4px'});
-                        
+
                 }
                 this.appended = true;
             }
@@ -804,16 +805,17 @@ RoomZoom.prototype = {
             }
             thumbnail.observe(this.settings.thumbnailChange, function (e) {
                 if($(thumbnail).hasClassName('zoomThumbActive')){
+                    e.stop();
                     return false;
                 }
                 thumblist.each(function (thumb) {
                     $(thumb).removeClassName('zoomThumbActive');
                 });
-                e.preventDefault();
+                e.stop();
                 this.swapimage(thumbnail);
                 return false;
             }.bind(this));
-            
+
             if (this.settings.thumbnailChange != 'click') {
                 thumbnail.observe('click', function (e) {
                     e.stop();
@@ -927,17 +929,18 @@ RoomZoom.prototype = {
         }
         return str;
     },
-    
+
     _expand: function(e) {
         e.preventDefault();
-        
+        e.stop();
+
         if(!this.settings.disableExpand) {
             this.expand();
         }
-        
+
         return false;
     },
-    
+
     expand : function() {
         window.lightbox.start(this.el);
     }
@@ -956,7 +959,7 @@ RoomZoom.prototype = {
 //	Licensed under the Creative Commons Attribution 2.5 License - http://creativecommons.org/licenses/by/2.5/
 //  	- Free for use in both personal and commercial projects
 //		- Attribution requires leaving author name, author link, and the license info intact.
-//	
+//
 //  Thanks: Scott Upton(uptonic.com), Peter-Paul Koch(quirksmode.com), and Thomas Fuchs(mir.aculo.us) for ideas, libs, and snippets.
 //  		Artemy Tregubenko (arty.name) for cleanup and help in updating to latest ver of proto-aculous.
 //
@@ -981,10 +984,10 @@ RoomZoom.prototype = {
     - keyboardAction()
     - preloadNeighborImages()
     - end()
-    
+
     Function Calls
     - document.observe()
-   
+
 */
 // -----------------------------------------------------------------------------------
 
@@ -992,15 +995,13 @@ RoomZoom.prototype = {
 //  Configurationl
 //
 LightboxOptions = Object.extend({
-    fileLoadingImage:        'images/zoomloader.gif',     
-    fileBottomNavCloseImage: 'images/closelabel.gif',
-
+    fileLoadingImage:        'images/zoomloader.gif',
     overlayOpacity: 0.8,   // controls transparency of shadow overlay
 
     animate: true,         // toggles resizing animations
     resizeSpeed: 7,        // controls the speed of the image resizing animations (1=slowest and 10=fastest)
 
-    borderSize: 10,         //if you adjust the padding in the CSS, you will need to update this variable
+    borderSize: 0,         //if you adjust the padding in the CSS, you will need to update this variable
 
 	// When grouping images this is used to write: Image # of #.
 	// Change it for non-english localization
@@ -1015,13 +1016,13 @@ var Lightbox = Class.create();
 Lightbox.prototype = {
     imageArray: [],
     activeImage: undefined,
-    
+
     // initialize()
     // Constructor runs on completion of the DOM loading. Calls updateImageList and then
-    // the function inserts html at the bottom of the page which is used to display the shadow 
+    // the function inserts html at the bottom of the page which is used to display the shadow
     // overlay and the image container.
     //
-    initialize: function() {    
+    initialize: function() {
 
         this.keyboardAction = this.keyboardAction.bindAsEventListener(this);
 
@@ -1035,7 +1036,7 @@ Lightbox.prototype = {
         // If animations are turned off, it will be hidden as to prevent a flicker of a
         // white 250 by 250 box.
         var size = (LightboxOptions.animate ? 250 : 1) + 'px';
-        
+
 
         // Code inserts html at the bottom of the page that looks similar to this:
         //
@@ -1045,6 +1046,7 @@ Lightbox.prototype = {
         //          <div id="imageContainer">
         //              <img id="lightboxImage">
         //              <div style="" id="hoverNav">
+        //                  <a href="#" id="closeLink"></a>
         //                  <a href="#" id="prevLink"></a>
         //                  <a href="#" id="nextLink"></a>
         //              </div>
@@ -1062,9 +1064,6 @@ Lightbox.prototype = {
         //                  <span id="numberDisplay"></span>
         //              </div>
         //              <div id="bottomNav">
-        //                  <a href="#" id="bottomNavClose">
-        //                      <img src="images/close.gif">
-        //                  </a>
         //              </div>
         //          </div>
         //      </div>
@@ -1074,17 +1073,18 @@ Lightbox.prototype = {
         var objBody = $$('body')[0];
 
 		objBody.appendChild(Builder.node('div',{id:'overlay'}));
-	
+
         objBody.appendChild(Builder.node('div',{id:'lightbox'}, [
-            Builder.node('div',{id:'outerImageContainer'}, 
+            Builder.node('div',{id:'outerImageContainer'},
                 Builder.node('div',{id:'imageContainer'}, [
-                    Builder.node('img',{id:'lightboxImage'}), 
+                    Builder.node('img',{id:'lightboxImage'}),
                     Builder.node('div',{id:'hoverNav'}, [
+                        Builder.node('a',{id:'closeLink', href: '#'}),
                         Builder.node('a',{id:'prevLink', href: '#'}),
                         Builder.node('a',{id:'nextLink', href: '#'})
                     ]),
-                    Builder.node('div',{id:'loading'}, 
-                        Builder.node('a',{id:'loadingLink', href: '#'}, 
+                    Builder.node('div',{id:'loading'},
+                        Builder.node('a',{id:'loadingLink', href: '#'},
                             Builder.node('img', {src: LightboxOptions.fileLoadingImage})
                         )
                     )
@@ -1096,11 +1096,7 @@ Lightbox.prototype = {
                         Builder.node('span',{id:'caption'}),
                         Builder.node('span',{id:'numberDisplay'})
                     ]),
-                    Builder.node('div',{id:'bottomNav'},
-                        Builder.node('a',{id:'bottomNavClose', href: '#'},
-                            Builder.node('img', {src: LightboxOptions.fileBottomNavCloseImage})
-                        )
-                    )
+                    Builder.node('div',{id:'bottomNav'})
                 ])
             )
         ]));
@@ -1111,23 +1107,23 @@ Lightbox.prototype = {
 		$('outerImageContainer').setStyle({width: size, height: size});
 		$('prevLink').observe('click', (function(event) {event.stop();this.changeImage(this.activeImage - 1);}).bindAsEventListener(this));
 		$('nextLink').observe('click', (function(event) {event.stop();this.changeImage(this.activeImage + 1);}).bindAsEventListener(this));
+		$('closeLink').observe('click', (function(event) {event.stop();this.end();}).bind(this));
 		$('loadingLink').observe('click', (function(event) {event.stop();this.end();}).bind(this));
-		$('bottomNavClose').observe('click', (function(event) {event.stop();this.end();}).bind(this));
 
         var th = this;
         (function(){
-            var ids = 
-                'overlay lightbox outerImageContainer imageContainer lightboxImage hoverNav prevLink nextLink loading loadingLink ' + 
-                'imageDataContainer imageData imageDetails caption numberDisplay bottomNav bottomNavClose';   
+            var ids =
+                'overlay lightbox outerImageContainer imageContainer lightboxImage hoverNav prevLink nextLink loading loadingLink ' +
+                'imageDataContainer imageData imageDetails caption numberDisplay bottomNav closeLink';
             $w(ids).each(function(id){th[id] = $(id);});
         }).defer();
     },
-    
+
     //
     //  start()
     //  Display overlay and lightbox. If image is part of a set, add siblings to imageArray.
     //
-    start: function(imageLink) {    
+    start: function(imageLink) {
 
         $$('select', 'object', 'embed').each(function(node){node.style.visibility = 'hidden'});
 
@@ -1138,14 +1134,14 @@ Lightbox.prototype = {
         new Effect.Appear(this.overlay, {duration: this.overlayDuration, from: 0.0, to: LightboxOptions.overlayOpacity});
 
         this.imageArray = [];
-        var imageNum = 0;       
+        var imageNum = 0;
 
         if ((imageLink.getAttribute("rel") == 'lightbox')){
             // if image is NOT part of a set, add single image to imageArray
-            this.imageArray.push([imageLink.href, imageLink.title]);         
+            this.imageArray.push([imageLink.href, imageLink.title]);
         } else {
             // if image is part of a set..
-            this.imageArray = 
+            this.imageArray =
                 $$(imageLink.tagName + '[href][rel="gallery:' + imageLink.rel + '"]').
                 collect(function(anchor){return [anchor.href, anchor.title];}).
                 uniq();
@@ -1156,12 +1152,12 @@ Lightbox.prototype = {
             }
         }
 
-        // calculate top and left offset for the lightbox 
+        // calculate top and left offset for the lightbox
         var arrayPageScroll = document.viewport.getScrollOffsets();
         var lightboxTop = arrayPageScroll[1] + (document.viewport.getHeight() / 10);
         var lightboxLeft = arrayPageScroll[0];
         this.lightbox.setStyle({top: lightboxTop + 'px', left: lightboxLeft + 'px'}).show();
-        
+
         this.changeImage(imageNum);
     },
 
@@ -1169,8 +1165,13 @@ Lightbox.prototype = {
     //  changeImage()
     //  Hide most elements and preload image in preparation for resizing image container.
     //
-    changeImage: function(imageNum) {   
-        
+    changeImage: function(imageNum) {
+        if (imageNum > (this.imageArray.length - 1)) {
+            imageNum = 0;
+        } else if (imageNum < 0) {
+            imageNum = this.imageArray.length - 1;
+        }
+
         this.activeImage = imageNum; // update global var
 
         // hide elements during transition
@@ -1181,10 +1182,10 @@ Lightbox.prototype = {
         this.nextLink.hide();
 		// HACK: Opera9 does not currently support scriptaculous opacity and appear fx
         this.imageDataContainer.setStyle({opacity: .0001});
-        this.numberDisplay.hide();      
-        
+        this.numberDisplay.hide();
+
         var imgPreloader = new Image();
-        
+
         // once image is preloaded, resize image container
         imgPreloader.onload = (function(){
             this.lightboxImage.src = this.imageArray[this.activeImage][0];
@@ -1218,36 +1219,34 @@ Lightbox.prototype = {
         var wDiff = widthCurrent - widthNew;
         var hDiff = heightCurrent - heightNew;
 
-        if (hDiff != 0) new Effect.Scale(this.outerImageContainer, yScale, {scaleX: false, duration: this.resizeDuration, queue: 'front'}); 
-        if (wDiff != 0) new Effect.Scale(this.outerImageContainer, xScale, {scaleY: false, duration: this.resizeDuration, delay: this.resizeDuration}); 
+        if (hDiff != 0) new Effect.Scale(this.outerImageContainer, yScale, {scaleX: false, duration: this.resizeDuration, queue: 'front'});
+        if (wDiff != 0) new Effect.Scale(this.outerImageContainer, xScale, {scaleY: false, duration: this.resizeDuration});
 
-        // if new and old image are same size and no scaling transition is necessary, 
+        // if new and old image are same size and no scaling transition is necessary,
         // do a quick pause to prevent image flicker.
         var timeout = 0;
         if ((hDiff == 0) && (wDiff == 0)){
             timeout = 100;
-            if (Prototype.Browser.IE) timeout = 250;   
+            if (Prototype.Browser.IE) timeout = 250;
         }
 
         (function(){
-            this.prevLink.setStyle({height: imgHeight + 'px'});
-            this.nextLink.setStyle({height: imgHeight + 'px'});
             this.imageDataContainer.setStyle({width: widthNew + 'px'});
 
             this.showImage();
         }).bind(this).delay(timeout / 1000);
     },
-    
+
     //
     //  showImage()
     //  Display image and begin preloading neighbors.
     //
     showImage: function(){
         this.loading.hide();
-        new Effect.Appear(this.lightboxImage, { 
-            duration: this.resizeDuration, 
-            queue: 'end', 
-            afterFinish: (function(){this.updateDetails();}).bind(this) 
+        new Effect.Appear(this.lightboxImage, {
+            duration: this.resizeDuration,
+            queue: 'end',
+            afterFinish: (function(){this.updateDetails();}).bind(this)
         });
         this.preloadNeighborImages();
     },
@@ -1257,28 +1256,28 @@ Lightbox.prototype = {
     //  Display caption, image number, and bottom nav.
     //
     updateDetails: function() {
-    
+
         this.caption.update(this.imageArray[this.activeImage][1]).show();
 
-        // if image is part of set display 'Image x of x' 
+        // if image is part of set display 'Image x of x'
         if (this.imageArray.length > 1){
             this.numberDisplay.update( LightboxOptions.labelImage + ' ' + (this.activeImage + 1) + ' ' + LightboxOptions.labelOf + '  ' + this.imageArray.length).show();
         }
 
         new Effect.Parallel(
-            [ 
-                new Effect.SlideDown(this.imageDataContainer, {sync: true, duration: this.resizeDuration, from: 0.0, to: 1.0}), 
-                new Effect.Appear(this.imageDataContainer, {sync: true, duration: this.resizeDuration}) 
-            ], 
-            { 
-                duration: this.resizeDuration, 
+            [
+                new Effect.SlideDown(this.imageDataContainer, {sync: true, duration: this.resizeDuration, from: 0.0, to: 1.0}),
+                //new Effect.Appear(this.imageDataContainer, {sync: true, duration: this.resizeDuration})
+            ],
+            {
+                duration: this.resizeDuration,
                 afterFinish: (function() {
 	                // update overlay size and update nav
 	                var arrayPageSize = this.getPageSize();
 	                this.overlay.setStyle({width: arrayPageSize[0] + 'px', height: arrayPageSize[1] + 'px'});
 	                this.updateNav();
                 }).bind(this)
-            } 
+            }
         );
     },
 
@@ -1288,14 +1287,12 @@ Lightbox.prototype = {
     //
     updateNav: function() {
 
-        this.hoverNav.show();               
+        this.hoverNav.show();
+        if (this.imageArray.length > 1) {
+            this.prevLink.show();
+            this.nextLink.show();
+        }
 
-        // if not first image in set, display prev image button
-        if (this.activeImage > 0) this.prevLink.show();
-
-        // if not last image in set, display next image button
-        if (this.activeImage < (this.imageArray.length - 1)) this.nextLink.show();
-        
         this.enableKeyboardNav();
     },
 
@@ -1303,14 +1300,14 @@ Lightbox.prototype = {
     //  enableKeyboardNav()
     //
     enableKeyboardNav: function() {
-        document.observe('keydown', this.keyboardAction); 
+        document.observe('keydown', this.keyboardAction);
     },
 
     //
     //  disableKeyboardNav()
     //
     disableKeyboardNav: function() {
-        document.stopObserving('keydown', this.keyboardAction); 
+        document.stopObserving('keydown', this.keyboardAction);
     },
 
     //
@@ -1327,7 +1324,7 @@ Lightbox.prototype = {
         }
 
         var key = String.fromCharCode(keycode).toLowerCase();
-        
+
         if (key.match(/x|o|c/) || (keycode == escapeKey)){ // close lightbox
             this.end();
         } else if ((key == 'p') || (keycode == 37)){ // display previous image
@@ -1357,7 +1354,7 @@ Lightbox.prototype = {
             preloadPrevImage = new Image();
             preloadPrevImage.src = this.imageArray[this.activeImage - 1][0];
         }
-    
+
     },
 
     //
@@ -1374,10 +1371,10 @@ Lightbox.prototype = {
     //  getPageSize()
     //
     getPageSize: function() {
-	        
+
 	     var xScroll, yScroll;
-		
-		if (window.innerHeight && window.scrollMaxY) {	
+
+		if (window.innerHeight && window.scrollMaxY) {
 			xScroll = window.innerWidth + window.scrollMaxX;
 			yScroll = window.innerHeight + window.scrollMaxY;
 		} else if (document.body.scrollHeight > document.body.offsetHeight){ // all but Explorer Mac
@@ -1387,12 +1384,12 @@ Lightbox.prototype = {
 			xScroll = document.body.offsetWidth;
 			yScroll = document.body.offsetHeight;
 		}
-		
+
 		var windowWidth, windowHeight;
-		
+
 		if (self.innerHeight) {	// all except Explorer
 			if(document.documentElement.clientWidth){
-				windowWidth = document.documentElement.clientWidth; 
+				windowWidth = document.documentElement.clientWidth;
 			} else {
 				windowWidth = self.innerWidth;
 			}
@@ -1403,18 +1400,18 @@ Lightbox.prototype = {
 		} else if (document.body) { // other Explorers
 			windowWidth = document.body.clientWidth;
 			windowHeight = document.body.clientHeight;
-		}	
+		}
 
 		// for small pages with total height less then height of the viewport
 		if(yScroll < windowHeight){
 			pageHeight = windowHeight;
-		} else { 
+		} else {
 			pageHeight = yScroll;
 		}
-	
+
 		// for small pages with total width less then width of the viewport
-		if(xScroll < windowWidth){	
-			pageWidth = xScroll;		
+		if(xScroll < windowWidth){
+			pageWidth = xScroll;
 		} else {
 			pageWidth = windowWidth;
 		}
