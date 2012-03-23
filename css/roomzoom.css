@@ -122,14 +122,14 @@
     z-index: -1;
 }
 .zoomHint {
-    background:url(../images/zoom-ico.png) 0 center no-repeat;
-    padding: 2px 2px 2px 25px !important;
+    background:url(../images/zoom-ico.gif) 0 center no-repeat;
+    padding: 2px 2px 2px 20px !important;
     height: 18px;
     margin: 5px;
     text-decoration: none;
     text-align: left;
     font:normal 11px/18px Arial,Helvetica,sans-serif;
-    color: #646464;
+    color: #000000;
     cursor:pointer;
 }
 #lightbox{	position: absolute;	left: 0; width: 100%; z-index: 100; text-align: center; line-height: 0;}
