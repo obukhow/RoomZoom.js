@@ -11,7 +11,7 @@ To see a demo please visit [[http://roomine.github.com/RoomZoom.js/|github demo 
 
 == Installation ==
 
-To use this script, please add prototype library to your header. To use animation effects you should also add scriptaculous library, but it is not neccessary
+To use this script, please add prototype library to your header. All animation effectes use Scruptacolous, so you must also add this library.
 
             <script type='text/javascript' src='js/prototype.js'></script>
             <script type='text/javascript' src='js/roomzoom.js'></script>
@@ -59,9 +59,30 @@ This will instantiate RoomZoom in default(standard) mode.You can pass more optio
                 });
             });
 
+=== Galleries and Thumbnails ===
+
+If you want to create galleries, RoomZoom.js can manage it for you.
+
+Attach the gallery ID to your main anchor "rel" attribute.
+
+            <a href="BIGIMAGE.JPG" class="MYCLASS" title="MYTITLE" rel="gal1">  
+                <img src="SMALLIMAGE.JPG" title="IMAGE TITLE">  
+            </a>
+                
+Manage your thumbnails "class" and "rel" attributes. The class "zoomThumbActive" is attached to your thumbnails by RoomZoom.js. By default specify this class to the selected thumbnail (it should be the same image in your main anchor element)
+
+            <a class="zoomThumbActive" href="LARGEIMAGE1.jpg" rel="gallery:gal1" rev="SMALLIMAGE1.jpg">  
+                <img src="thumbs/THUMBIMG1.jpg">  
+            </a>
+                
+The structure of the thumbnail rel attribute is very important. The base elements are
+*gallery: the ID of the gallery to which it belongs.
+*smallimage: the path to the SMALLIMAGE to be loaded on the when you click on the thumbnail.
+*largeimage: the path to the LARGEIMAGE.
+
 == Configuration options ==
 
-Style customizations are obviously admitted simply changing the right parameters value in the jqzoom stylesheet file.
+Style customizations are obviously admitted simply changing the right parameters value in the roomzoom stylesheet file.
 
 {| border="1"
 |-
@@ -160,4 +181,8 @@ Style customizations are obviously admitted simply changing the right parameters
 |hintOpacity
 |0.75
 |Opacity of the hint. Decimal value from 0 to 1.
+|-
+|disableExpand
+|false
+|Disable expand window with large image.
 |}

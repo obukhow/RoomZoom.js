@@ -1,6 +1,6 @@
 
 /**
- * RoomZoom.js v1.2.1 Javascript Image Zoom Plugin for Prototype framework
+ * RoomZoom.js v1.2.3 Javascript Image Zoom Plugin for Prototype framework
  *
  * NOTICE OF LICENSE
  *
@@ -200,8 +200,8 @@ RoomZoom.prototype = {
             var $obj = this;
             this.append = function () {
                 this.node = new Element('div', ({
-                    'id':'zoomPreload' + obj.el.rel,
-                    'class':'zoomPreload'
+                    'id'        :'zoomPreload' + obj.el.rel,
+                    'class'     :'zoomPreload'
                 }));
                 this.node.setStyle({
                     'visibility': 'hidden'
@@ -234,8 +234,8 @@ RoomZoom.prototype = {
         function Lens() {
             var $obj = this;
             this.node = new Element('div', ({
-                'id'   : 'zoomPup'  + obj.el.rel,
-                'class': 'zoomPup'
+                'id'       : 'zoomPup'  + obj.el.rel,
+                'class'    : 'zoomPup'
             }));
             //this.nodeimgwrapper = $("<div/>").addClass('zoomPupImgWrapper');
             this.append = function () {
@@ -376,19 +376,19 @@ RoomZoom.prototype = {
             var $obj = this;
             this.effect = null;
             this.node = new Element("div", ({
-                'id'    :'zoomWindow'  + obj.el.rel,
-                'class' :'zoomWindow'
+                'id'        :'zoomWindow'  + obj.el.rel,
+                'class'     :'zoomWindow'
             }));
             this.node.update('<div id="zoomWrapper' + obj.el.rel + '" class="zoomWrapper"><div id="zoomWrapperTitle' + obj.el.rel + '" class="zoomWrapperTitle"></div><div id="zoomWrapperImage' + obj.el.rel + '" class="zoomWrapperImage"></div></div>')
             this.ieframe = new Element('iframe', ({
-                'id':'zoomIframe' +  + obj.el.rel,
-                'class':'zoomIframe' +  + obj.el.rel,
-                'src': 'javascript:\'\';',
-                'marginwidth':0,
+                'id'          :'zoomIframe' + obj.el.rel,
+                'class'       :'zoomIframe',
+                'src'         : 'javascript:\'\';',
+                'marginwidth' :0,
                 'marginheight':0,
-                'align':'bottom',
-                'scrolling':'no',
-                'frameborder':0
+                'align'       :'bottom',
+                'scrolling'   :'no',
+                'frameborder' :0
             }))
             this.setposition = function () {
                 this.node.leftpos = 0;
@@ -637,7 +637,9 @@ RoomZoom.prototype = {
 
         function Hint() {
             var $obj = this;
-            this.node = new Element('div', ({'class' : 'zoomHint'}));
+            this.node = new Element('div', ({
+                'class'     : 'zoomHint'
+            }));
             this.node.setStyle({
                 'overflow' : 'hidden',
                 'position' : 'absolute',
@@ -701,7 +703,7 @@ RoomZoom.prototype = {
         if (!$("zoomPad" + this.el.rel)) {
             this.el.zoomPad = new Element('div', ({
                 'id':'zoomPad' + this.el.rel,
-                'class' : 'zoomPad'
+                'class'     : 'zoomPad'
             }));
             this.img[0].wrap(this.el.zoomPad);
         }
@@ -949,19 +951,19 @@ RoomZoom.prototype = {
 
 // -----------------------------------------------------------------------------------
 //
-//	Lightbox v2.05
-//	by Lokesh Dhakar - http://www.lokeshdhakar.com
-//	Last Modification: 3/18/11
+//  Lightbox v2.05
+//  by Lokesh Dhakar - http://www.lokeshdhakar.com
+//  Last Modification: 3/18/11
 //
-//	For more information, visit:
-//	http://lokeshdhakar.com/projects/lightbox2/
+//  For more information, visit:
+//  http://lokeshdhakar.com/projects/lightbox2/
 //
-//	Licensed under the Creative Commons Attribution 2.5 License - http://creativecommons.org/licenses/by/2.5/
-//  	- Free for use in both personal and commercial projects
-//		- Attribution requires leaving author name, author link, and the license info intact.
+//  Licensed under the Creative Commons Attribution 2.5 License - http://creativecommons.org/licenses/by/2.5/
+//      - Free for use in both personal and commercial projects
+//      - Attribution requires leaving author name, author link, and the license info intact.
 //
 //  Thanks: Scott Upton(uptonic.com), Peter-Paul Koch(quirksmode.com), and Thomas Fuchs(mir.aculo.us) for ideas, libs, and snippets.
-//  		Artemy Tregubenko (arty.name) for cleanup and help in updating to latest ver of proto-aculous.
+//          Artemy Tregubenko (arty.name) for cleanup and help in updating to latest ver of proto-aculous.
 //
 // -----------------------------------------------------------------------------------
 /*
@@ -1003,10 +1005,10 @@ LightboxOptions = Object.extend({
 
     borderSize: 0,         //if you adjust the padding in the CSS, you will need to update this variable
 
-	// When grouping images this is used to write: Image # of #.
-	// Change it for non-english localization
-	labelImage: "Image",
-	labelOf: "of"
+    // When grouping images this is used to write: Image # of #.
+    // Change it for non-english localization
+    labelImage: "Image",
+    labelOf: "of"
 }, window.LightboxOptions || {});
 
 // -----------------------------------------------------------------------------------
@@ -1029,8 +1031,8 @@ Lightbox.prototype = {
         if (LightboxOptions.resizeSpeed > 10) LightboxOptions.resizeSpeed = 10;
         if (LightboxOptions.resizeSpeed < 1)  LightboxOptions.resizeSpeed = 1;
 
-	    this.resizeDuration = LightboxOptions.animate ? ((11 - LightboxOptions.resizeSpeed) * 0.15) : 0;
-	    this.overlayDuration = LightboxOptions.animate ? 0.2 : 0;  // shadow fade in/out duration
+        this.resizeDuration = LightboxOptions.animate ? ((11 - LightboxOptions.resizeSpeed) * 0.15) : 0;
+        this.overlayDuration = LightboxOptions.animate ? 0.2 : 0;  // shadow fade in/out duration
 
         // When Lightbox starts it will resize itself from 250 by 250 to the current image dimension.
         // If animations are turned off, it will be hidden as to prevent a flicker of a
@@ -1072,7 +1074,7 @@ Lightbox.prototype = {
 
         var objBody = $$('body')[0];
 
-		objBody.appendChild(Builder.node('div',{id:'overlay'}));
+        objBody.appendChild(Builder.node('div',{id:'overlay'}));
 
         objBody.appendChild(Builder.node('div',{id:'lightbox'}, [
             Builder.node('div',{id:'outerImageContainer'},
@@ -1102,13 +1104,13 @@ Lightbox.prototype = {
         ]));
 
 
-		$('overlay').hide().observe('click', (function() {this.end();}).bind(this));
-		$('lightbox').hide().observe('click', (function(event) {if (event.element().id == 'lightbox') this.end();}).bind(this));
-		$('outerImageContainer').setStyle({width: size, height: size});
-		$('prevLink').observe('click', (function(event) {event.stop();this.changeImage(this.activeImage - 1);}).bindAsEventListener(this));
-		$('nextLink').observe('click', (function(event) {event.stop();this.changeImage(this.activeImage + 1);}).bindAsEventListener(this));
-		$('closeLink').observe('click', (function(event) {event.stop();this.end();}).bind(this));
-		$('loadingLink').observe('click', (function(event) {event.stop();this.end();}).bind(this));
+        $('overlay').hide().observe('click', (function() {this.end();}).bind(this));
+        $('lightbox').hide().observe('click', (function(event) {if (event.element().id == 'lightbox') this.end();}).bind(this));
+        $('outerImageContainer').setStyle({'width': size, 'height': size});
+        $('prevLink').observe('click', (function(event) {event.stop();this.changeImage(this.activeImage - 1);}).bindAsEventListener(this));
+        $('nextLink').observe('click', (function(event) {event.stop();this.changeImage(this.activeImage + 1);}).bindAsEventListener(this));
+        $('closeLink').observe('click', (function(event) {event.stop();this.end();}).bind(this));
+        $('loadingLink').observe('click', (function(event) {event.stop();this.end();}).bind(this));
 
         var th = this;
         (function(){
@@ -1129,7 +1131,7 @@ Lightbox.prototype = {
 
         // stretch overlay to fill page and fade in
         var arrayPageSize = this.getPageSize();
-        $('overlay').setStyle({width: arrayPageSize[0] + 'px', height: arrayPageSize[1] + 'px'});
+        $('overlay').setStyle({'width': arrayPageSize[0] + 'px', 'height': arrayPageSize[1] + 'px'});
 
         new Effect.Appear(this.overlay, {duration: this.overlayDuration, from: 0.0, to: LightboxOptions.overlayOpacity});
 
@@ -1154,9 +1156,9 @@ Lightbox.prototype = {
 
         // calculate top and left offset for the lightbox
         var arrayPageScroll = document.viewport.getScrollOffsets();
-        var lightboxTop = arrayPageScroll[1] + (document.viewport.getHeight() / 10);
+        var lightboxTop = arrayPageScroll[1] + (document.viewport.getHeight() / 20);
         var lightboxLeft = arrayPageScroll[0];
-        this.lightbox.setStyle({top: lightboxTop + 'px', left: lightboxLeft + 'px'}).show();
+        this.lightbox.setStyle({'top': lightboxTop + 'px', 'left': lightboxLeft + 'px'}).show();
 
         this.changeImage(imageNum);
     },
@@ -1180,8 +1182,8 @@ Lightbox.prototype = {
         this.hoverNav.hide();
         this.prevLink.hide();
         this.nextLink.hide();
-		// HACK: Opera9 does not currently support scriptaculous opacity and appear fx
-        this.imageDataContainer.setStyle({opacity: .0001});
+        // HACK: Opera9 does not currently support scriptaculous opacity and appear fx
+        this.imageDataContainer.setStyle({'opacity': .0001});
         this.numberDisplay.hide();
 
         var imgPreloader = new Image();
@@ -1189,10 +1191,32 @@ Lightbox.prototype = {
         // once image is preloaded, resize image container
         imgPreloader.onload = (function(){
             this.lightboxImage.src = this.imageArray[this.activeImage][0];
+
+            var pageSize = this.getWindowSize();
+
+            if (imgPreloader.width > pageSize[0]) {
+                var newWidth = pageSize[0] * 0.9;
+                var k = newWidth / imgPreloader.width;
+                imgPreloader.width = newWidth;
+                imgPreloader.height *= k;
+            }
+
+            if (imgPreloader.height > pageSize[1]) {
+                var newHeight = pageSize[1] * 0.9;
+                var k = newHeight / imgPreloader.height;
+                imgPreloader.height = newHeight;
+                imgPreloader.width *= k;
+            }
             /*Bug Fixed by Andy Scott*/
             this.lightboxImage.width = imgPreloader.width;
             this.lightboxImage.height = imgPreloader.height;
+
             /*End of Bug Fix*/
+
+            this.lightboxImage.setStyle({
+                'width' : "100%",
+                'height': "auto"
+            })
             this.resizeImageContainer(imgPreloader.width, imgPreloader.height);
         }).bind(this);
         imgPreloader.src = this.imageArray[this.activeImage][0];
@@ -1210,6 +1234,8 @@ Lightbox.prototype = {
         // get new width and height
         var widthNew  = (imgWidth  + LightboxOptions.borderSize * 2);
         var heightNew = (imgHeight + LightboxOptions.borderSize * 2);
+
+
 
         // scalars based on change from old to new
         var xScale = (widthNew  / widthCurrent)  * 100;
@@ -1231,7 +1257,7 @@ Lightbox.prototype = {
         }
 
         (function(){
-            this.imageDataContainer.setStyle({width: widthNew + 'px'});
+            this.imageDataContainer.setStyle({'width': widthNew + 'px'});
 
             this.showImage();
         }).bind(this).delay(timeout / 1000);
@@ -1272,10 +1298,10 @@ Lightbox.prototype = {
             {
                 duration: this.resizeDuration,
                 afterFinish: (function() {
-	                // update overlay size and update nav
-	                var arrayPageSize = this.getPageSize();
-	                this.overlay.setStyle({width: arrayPageSize[0] + 'px', height: arrayPageSize[1] + 'px'});
-	                this.updateNav();
+                    // update overlay size and update nav
+                    var arrayPageSize = this.getPageSize();
+                    this.overlay.setStyle({'width': arrayPageSize[0] + 'px', 'height': arrayPageSize[1] + 'px'});
+                    this.updateNav();
                 }).bind(this)
             }
         );
@@ -1372,52 +1398,77 @@ Lightbox.prototype = {
     //
     getPageSize: function() {
 
-	     var xScroll, yScroll;
+         var xScroll, yScroll;
 
-		if (window.innerHeight && window.scrollMaxY) {
-			xScroll = window.innerWidth + window.scrollMaxX;
-			yScroll = window.innerHeight + window.scrollMaxY;
-		} else if (document.body.scrollHeight > document.body.offsetHeight){ // all but Explorer Mac
-			xScroll = document.body.scrollWidth;
-			yScroll = document.body.scrollHeight;
-		} else { // Explorer Mac...would also work in Explorer 6 Strict, Mozilla and Safari
-			xScroll = document.body.offsetWidth;
-			yScroll = document.body.offsetHeight;
-		}
+        if (window.innerHeight && window.scrollMaxY) {
+            xScroll = window.innerWidth + window.scrollMaxX;
+            yScroll = window.innerHeight + window.scrollMaxY;
+        } else if (document.body.scrollHeight > document.body.offsetHeight){ // all but Explorer Mac
+            xScroll = document.body.scrollWidth;
+            yScroll = document.body.scrollHeight;
+        } else { // Explorer Mac...would also work in Explorer 6 Strict, Mozilla and Safari
+            xScroll = document.body.offsetWidth;
+            yScroll = document.body.offsetHeight;
+        }
 
-		var windowWidth, windowHeight;
+        var windowWidth, windowHeight;
 
-		if (self.innerHeight) {	// all except Explorer
-			if(document.documentElement.clientWidth){
-				windowWidth = document.documentElement.clientWidth;
-			} else {
-				windowWidth = self.innerWidth;
-			}
-			windowHeight = self.innerHeight;
-		} else if (document.documentElement && document.documentElement.clientHeight) { // Explorer 6 Strict Mode
-			windowWidth = document.documentElement.clientWidth;
-			windowHeight = document.documentElement.clientHeight;
-		} else if (document.body) { // other Explorers
-			windowWidth = document.body.clientWidth;
-			windowHeight = document.body.clientHeight;
-		}
+        if (self.innerHeight) { // all except Explorer
+            if(document.documentElement.clientWidth){
+                windowWidth = document.documentElement.clientWidth;
+            } else {
+                windowWidth = self.innerWidth;
+            }
+            windowHeight = self.innerHeight;
+        } else if (document.documentElement && document.documentElement.clientHeight) { // Explorer 6 Strict Mode
+            windowWidth = document.documentElement.clientWidth;
+            windowHeight = document.documentElement.clientHeight;
+        } else if (document.body) { // other Explorers
+            windowWidth = document.body.clientWidth;
+            windowHeight = document.body.clientHeight;
+        }
 
-		// for small pages with total height less then height of the viewport
-		if(yScroll < windowHeight){
-			pageHeight = windowHeight;
-		} else {
-			pageHeight = yScroll;
-		}
+        // for small pages with total height less then height of the viewport
+        if(yScroll < windowHeight){
+            pageHeight = windowHeight;
+        } else {
+            pageHeight = yScroll;
+        }
 
-		// for small pages with total width less then width of the viewport
-		if(xScroll < windowWidth){
-			pageWidth = xScroll;
-		} else {
-			pageWidth = windowWidth;
-		}
+        // for small pages with total width less then width of the viewport
+        if(xScroll < windowWidth){
+            pageWidth = xScroll;
+        } else {
+            pageWidth = windowWidth;
+        }
 
-		return [pageWidth,pageHeight];
-	}
+        return [pageWidth,pageHeight];
+    },
+    /**
+     * Get visible window size
+     * 
+     * @return array
+     */
+    getWindowSize: function() {
+        var windowWidth, windowHeight;
+        
+        if (self.innerHeight) { // all except Explorer
+            if(document.documentElement.clientWidth){
+                windowWidth = document.documentElement.clientWidth;
+            } else {
+                windowWidth = self.innerWidth;
+            }
+            windowHeight = self.innerHeight;
+        } else if (document.documentElement && document.documentElement.clientHeight) { // Explorer 6 Strict Mode
+            windowWidth = document.documentElement.clientWidth;
+            windowHeight = document.documentElement.clientHeight;
+        } else if (document.body) { // other Explorers
+            windowWidth = document.body.clientWidth;
+            windowHeight = document.body.clientHeight;
+        }
+
+        return [windowWidth, windowHeight];
+    }
 }
 
 document.observe('dom:loaded', function () {window.lightbox = new Lightbox();});
