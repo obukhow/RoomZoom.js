@@ -201,8 +201,7 @@ RoomZoom.prototype = {
             this.append = function () {
                 this.node = new Element('div', ({
                     'id'        :'zoomPreload' + obj.el.rel,
-                    'class'     :'zoomPreload',
-                    'className' :'zoomPreload'
+                    'class'     :'zoomPreload'
                 }));
                 this.node.setStyle({
                     'visibility': 'hidden'
@@ -236,8 +235,7 @@ RoomZoom.prototype = {
             var $obj = this;
             this.node = new Element('div', ({
                 'id'       : 'zoomPup'  + obj.el.rel,
-                'class'    : 'zoomPup',
-                'className': 'zoomPup'
+                'class'    : 'zoomPup'
             }));
             //this.nodeimgwrapper = $("<div/>").addClass('zoomPupImgWrapper');
             this.append = function () {
@@ -379,14 +377,12 @@ RoomZoom.prototype = {
             this.effect = null;
             this.node = new Element("div", ({
                 'id'        :'zoomWindow'  + obj.el.rel,
-                'class'     :'zoomWindow',
-                'className' :'zoomWindow'
+                'class'     :'zoomWindow'
             }));
             this.node.update('<div id="zoomWrapper' + obj.el.rel + '" class="zoomWrapper"><div id="zoomWrapperTitle' + obj.el.rel + '" class="zoomWrapperTitle"></div><div id="zoomWrapperImage' + obj.el.rel + '" class="zoomWrapperImage"></div></div>')
             this.ieframe = new Element('iframe', ({
                 'id'          :'zoomIframe' + obj.el.rel,
                 'class'       :'zoomIframe',
-                'className'   :'zoomIframe',
                 'src'         : 'javascript:\'\';',
                 'marginwidth' :0,
                 'marginheight':0,
@@ -642,8 +638,7 @@ RoomZoom.prototype = {
         function Hint() {
             var $obj = this;
             this.node = new Element('div', ({
-                'class'     : 'zoomHint',
-                'className' : 'zoomHint'
+                'class'     : 'zoomHint'
             }));
             this.node.setStyle({
                 'overflow' : 'hidden',
@@ -708,8 +703,7 @@ RoomZoom.prototype = {
         if (!$("zoomPad" + this.el.rel)) {
             this.el.zoomPad = new Element('div', ({
                 'id':'zoomPad' + this.el.rel,
-                'class'     : 'zoomPad',
-                'className' : 'zoomPad'
+                'class'     : 'zoomPad'
             }));
             this.img[0].wrap(this.el.zoomPad);
         }
