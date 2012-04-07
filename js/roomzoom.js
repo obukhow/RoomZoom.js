@@ -1,6 +1,6 @@
 
 /**
- * RoomZoom.js v1.2.2 Javascript Image Zoom Plugin for Prototype framework
+ * RoomZoom.js v1.2.3 Javascript Image Zoom Plugin for Prototype framework
  *
  * NOTICE OF LICENSE
  *
@@ -200,8 +200,9 @@ RoomZoom.prototype = {
             var $obj = this;
             this.append = function () {
                 this.node = new Element('div', ({
-                    'id':'zoomPreload' + obj.el.rel,
-                    'class':'zoomPreload'
+                    'id'        :'zoomPreload' + obj.el.rel,
+                    'class'     :'zoomPreload',
+                    'className' :'zoomPreload'
                 }));
                 this.node.setStyle({
                     'visibility': 'hidden'
@@ -234,8 +235,9 @@ RoomZoom.prototype = {
         function Lens() {
             var $obj = this;
             this.node = new Element('div', ({
-                'id'   : 'zoomPup'  + obj.el.rel,
-                'class': 'zoomPup'
+                'id'       : 'zoomPup'  + obj.el.rel,
+                'class'    : 'zoomPup',
+                'className': 'zoomPup'
             }));
             //this.nodeimgwrapper = $("<div/>").addClass('zoomPupImgWrapper');
             this.append = function () {
@@ -376,19 +378,21 @@ RoomZoom.prototype = {
             var $obj = this;
             this.effect = null;
             this.node = new Element("div", ({
-                'id'    :'zoomWindow'  + obj.el.rel,
-                'class' :'zoomWindow'
+                'id'        :'zoomWindow'  + obj.el.rel,
+                'class'     :'zoomWindow',
+                'className' :'zoomWindow'
             }));
             this.node.update('<div id="zoomWrapper' + obj.el.rel + '" class="zoomWrapper"><div id="zoomWrapperTitle' + obj.el.rel + '" class="zoomWrapperTitle"></div><div id="zoomWrapperImage' + obj.el.rel + '" class="zoomWrapperImage"></div></div>')
             this.ieframe = new Element('iframe', ({
-                'id':'zoomIframe' +  + obj.el.rel,
-                'class':'zoomIframe' +  + obj.el.rel,
-                'src': 'javascript:\'\';',
-                'marginwidth':0,
+                'id'          :'zoomIframe' + obj.el.rel,
+                'class'       :'zoomIframe',
+                'className'   :'zoomIframe',
+                'src'         : 'javascript:\'\';',
+                'marginwidth' :0,
                 'marginheight':0,
-                'align':'bottom',
-                'scrolling':'no',
-                'frameborder':0
+                'align'       :'bottom',
+                'scrolling'   :'no',
+                'frameborder' :0
             }))
             this.setposition = function () {
                 this.node.leftpos = 0;
@@ -637,7 +641,10 @@ RoomZoom.prototype = {
 
         function Hint() {
             var $obj = this;
-            this.node = new Element('div', ({'class' : 'zoomHint'}));
+            this.node = new Element('div', ({
+                'class'     : 'zoomHint'
+                'className' : 'zoomHint',
+            }));
             this.node.setStyle({
                 'overflow' : 'hidden',
                 'position' : 'absolute',
@@ -701,7 +708,8 @@ RoomZoom.prototype = {
         if (!$("zoomPad" + this.el.rel)) {
             this.el.zoomPad = new Element('div', ({
                 'id':'zoomPad' + this.el.rel,
-                'class' : 'zoomPad'
+                'class'     : 'zoomPad',
+                'className' : 'zoomPad'
             }));
             this.img[0].wrap(this.el.zoomPad);
         }
@@ -1104,7 +1112,7 @@ Lightbox.prototype = {
 
 		$('overlay').hide().observe('click', (function() {this.end();}).bind(this));
 		$('lightbox').hide().observe('click', (function(event) {if (event.element().id == 'lightbox') this.end();}).bind(this));
-		$('outerImageContainer').setStyle({width: size, height: size});
+		$('outerImageContainer').setStyle({'width': size, 'height': size});
 		$('prevLink').observe('click', (function(event) {event.stop();this.changeImage(this.activeImage - 1);}).bindAsEventListener(this));
 		$('nextLink').observe('click', (function(event) {event.stop();this.changeImage(this.activeImage + 1);}).bindAsEventListener(this));
 		$('closeLink').observe('click', (function(event) {event.stop();this.end();}).bind(this));
@@ -1129,7 +1137,7 @@ Lightbox.prototype = {
 
         // stretch overlay to fill page and fade in
         var arrayPageSize = this.getPageSize();
-        $('overlay').setStyle({width: arrayPageSize[0] + 'px', height: arrayPageSize[1] + 'px'});
+        $('overlay').setStyle({'width': arrayPageSize[0] + 'px', 'height': arrayPageSize[1] + 'px'});
 
         new Effect.Appear(this.overlay, {duration: this.overlayDuration, from: 0.0, to: LightboxOptions.overlayOpacity});
 
@@ -1156,7 +1164,7 @@ Lightbox.prototype = {
         var arrayPageScroll = document.viewport.getScrollOffsets();
         var lightboxTop = arrayPageScroll[1] + (document.viewport.getHeight() / 20);
         var lightboxLeft = arrayPageScroll[0];
-        this.lightbox.setStyle({top: lightboxTop + 'px', left: lightboxLeft + 'px'}).show();
+        this.lightbox.setStyle({'top': lightboxTop + 'px', 'left': lightboxLeft + 'px'}).show();
 
         this.changeImage(imageNum);
     },
@@ -1181,7 +1189,7 @@ Lightbox.prototype = {
         this.prevLink.hide();
         this.nextLink.hide();
 		// HACK: Opera9 does not currently support scriptaculous opacity and appear fx
-        this.imageDataContainer.setStyle({opacity: .0001});
+        this.imageDataContainer.setStyle({'opacity': .0001});
         this.numberDisplay.hide();
 
         var imgPreloader = new Image();
@@ -1255,7 +1263,7 @@ Lightbox.prototype = {
         }
 
         (function(){
-            this.imageDataContainer.setStyle({width: widthNew + 'px'});
+            this.imageDataContainer.setStyle({'width': widthNew + 'px'});
 
             this.showImage();
         }).bind(this).delay(timeout / 1000);
@@ -1298,7 +1306,7 @@ Lightbox.prototype = {
                 afterFinish: (function() {
 	                // update overlay size and update nav
 	                var arrayPageSize = this.getPageSize();
-	                this.overlay.setStyle({width: arrayPageSize[0] + 'px', height: arrayPageSize[1] + 'px'});
+	                this.overlay.setStyle({'width': arrayPageSize[0] + 'px', 'height': arrayPageSize[1] + 'px'});
 	                this.updateNav();
                 }).bind(this)
             }
