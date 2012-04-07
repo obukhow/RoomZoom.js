@@ -642,8 +642,8 @@ RoomZoom.prototype = {
         function Hint() {
             var $obj = this;
             this.node = new Element('div', ({
-                'class'     : 'zoomHint'
-                'className' : 'zoomHint',
+                'class'     : 'zoomHint',
+                'className' : 'zoomHint'
             }));
             this.node.setStyle({
                 'overflow' : 'hidden',
