@@ -1,6 +1,6 @@
 
 /**
- * RoomZoom.js v1.2.1 Javascript Image Zoom Plugin for Prototype framework
+ * RoomZoom.js v1.2.2 Javascript Image Zoom Plugin for Prototype framework
  *
  * NOTICE OF LICENSE
  *
@@ -1154,7 +1154,7 @@ Lightbox.prototype = {
 
         // calculate top and left offset for the lightbox
         var arrayPageScroll = document.viewport.getScrollOffsets();
-        var lightboxTop = arrayPageScroll[1] + (document.viewport.getHeight() / 10);
+        var lightboxTop = arrayPageScroll[1] + (document.viewport.getHeight() / 20);
         var lightboxLeft = arrayPageScroll[0];
         this.lightbox.setStyle({top: lightboxTop + 'px', left: lightboxLeft + 'px'}).show();
 
@@ -1189,10 +1189,32 @@ Lightbox.prototype = {
         // once image is preloaded, resize image container
         imgPreloader.onload = (function(){
             this.lightboxImage.src = this.imageArray[this.activeImage][0];
+
+            var pageSize = this.getWindowSize();
+
+            if (imgPreloader.width > pageSize[0]) {
+                var newWidth = pageSize[0] * 0.9;
+                var k = newWidth / imgPreloader.width;
+                imgPreloader.width = newWidth;
+                imgPreloader.height *= k;
+            }
+
+            if (imgPreloader.height > pageSize[1]) {
+                var newHeight = pageSize[1] * 0.9;
+                var k = newHeight / imgPreloader.height;
+                imgPreloader.height = newHeight;
+                imgPreloader.width *= k;
+            }
             /*Bug Fixed by Andy Scott*/
             this.lightboxImage.width = imgPreloader.width;
             this.lightboxImage.height = imgPreloader.height;
+
             /*End of Bug Fix*/
+
+            this.lightboxImage.setStyle({
+                'width' : "100%",
+                'height': "auto"
+            })
             this.resizeImageContainer(imgPreloader.width, imgPreloader.height);
         }).bind(this);
         imgPreloader.src = this.imageArray[this.activeImage][0];
@@ -1210,6 +1232,8 @@ Lightbox.prototype = {
         // get new width and height
         var widthNew  = (imgWidth  + LightboxOptions.borderSize * 2);
         var heightNew = (imgHeight + LightboxOptions.borderSize * 2);
+
+
 
         // scalars based on change from old to new
         var xScale = (widthNew  / widthCurrent)  * 100;
@@ -1417,7 +1441,32 @@ Lightbox.prototype = {
 		}
 
 		return [pageWidth,pageHeight];
-	}
+	},
+    /**
+     * Get visible window size
+     * 
+     * @return array
+     */
+    getWindowSize: function() {
+        var windowWidth, windowHeight;
+        
+        if (self.innerHeight) { // all except Explorer
+            if(document.documentElement.clientWidth){
+                windowWidth = document.documentElement.clientWidth;
+            } else {
+                windowWidth = self.innerWidth;
+            }
+            windowHeight = self.innerHeight;
+        } else if (document.documentElement && document.documentElement.clientHeight) { // Explorer 6 Strict Mode
+            windowWidth = document.documentElement.clientWidth;
+            windowHeight = document.documentElement.clientHeight;
+        } else if (document.body) { // other Explorers
+            windowWidth = document.body.clientWidth;
+            windowHeight = document.body.clientHeight;
+        }
+
+        return [windowWidth, windowHeight];
+    }
 }
 
 document.observe('dom:loaded', function () {window.lightbox = new Lightbox();});

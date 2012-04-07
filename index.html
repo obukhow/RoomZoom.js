@@ -50,6 +50,19 @@
             .td-value {width: 140px; font-family: monospace; border-left: 1px dashed #72C2EF; border-right: 1px dashed #72C2EF;}
             th.td-value {font-family: sans-serif;}
         </style>
+        <script type="text/javascript">
+
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-30675289-1']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+        </script>
     </head>
 
     <body>
@@ -195,7 +208,7 @@
             <h2><a name="Installation">Installation</a></h2>
 
 
-            <p>To use this script, please add prototype library to your header. To use animation effects you should also add scriptaculous library, but it is not neccessary
+            <p>To use this script, please add prototype library to your header. All animation effectes use Scruptacolous, so you must also add this library.
             </p>
 
             <pre style='color:#d1d1d1;background:#000000;'>
@@ -226,11 +239,6 @@
             <p>The anchor element wraps the small image you would like to zoom. Following this schema the necessary and base elements are:
             </p>
 
-
-
-
-
-
             <p></p><ul>
                 <li>SMALLIMAGE.JPG: Represents the small image you would like to zoom.</li>
                 <li>BIGIMAGE.JPG: Represents the big image that RoomZoom will reveal.</li>
@@ -242,8 +250,8 @@
 
 
             <pre style='color:#d1d1d1;background:#000000;'>document<span style='color:#d2cd86; '>.</span>observe<span style='color:#d2cd86; '>(</span><span style='color:#00c4c4; '>'dom:loaded'</span><span style='color:#d2cd86; '>,</span> <span style='color:#e66170; font-weight:bold; '>function</span><span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>{</span>
-                zoom <span style='color:#d2cd86; '>=</span> <span style='color:#e66170; font-weight:bold; '>new</span> RoomZoom<span style='color:#d2cd86; '>(</span>$<span style='color:#d2cd86; '>(</span><span style='color:#00c4c4; '>'zoomer'</span><span style='color:#d2cd86; '>)</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
-            <span style='color:#b060b0; '>}</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+    zoom <span style='color:#d2cd86; '>=</span> <span style='color:#e66170; font-weight:bold; '>new</span> RoomZoom<span style='color:#d2cd86; '>(</span>$<span style='color:#d2cd86; '>(</span><span style='color:#00c4c4; '>'zoomer'</span><span style='color:#d2cd86; '>)</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+<span style='color:#b060b0; '>}</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
             </pre>
 
             <p>This will instantiate RoomZoom in default(standard) mode. You can pass more options(Documentation section), to create special or custom effects as in the example below.
@@ -251,23 +259,50 @@
 
             <pre style='color:#d1d1d1;background:#000000;'>document<span style='color:#d2cd86; '>.</span>observe<span style='color:#d2cd86; '>(</span><span style='color:#00c4c4; '>'dom:loaded'</span><span style='color:#d2cd86; '>,</span> <span style='color:#e66170; font-weight:bold; '>function</span><span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>{</span>
                 zoom <span style='color:#d2cd86; '>=</span> <span style='color:#e66170; font-weight:bold; '>new</span> RoomZoom<span style='color:#d2cd86; '>(</span>$<span style='color:#d2cd86; '>(</span><span style='color:#00c4c4; '>'zoomer'</span><span style='color:#d2cd86; '>)</span><span style='color:#d2cd86; '>,</span> <span style='color:#b060b0; '>{</span>
-                    alwaysOn <span style='color:#b060b0; '>:</span> <span style='color:#0f4d75; '>false</span><span style='color:#d2cd86; '>,</span>
-                    zoomWidth<span style='color:#b060b0; '>:</span> <span style='color:#008c00; '>250</span><span style='color:#d2cd86; '>,</span>
-                    zoomHeight<span style='color:#b060b0; '>:</span><span style='color:#008c00; '>200</span><span style='color:#d2cd86; '>,</span>
-                    position<span style='color:#b060b0; '>:</span><span style='color:#00c4c4; '>'left'</span><span style='color:#d2cd86; '>,</span>
-                    xOffset<span style='color:#b060b0; '>:</span> <span style='color:#008c00; '>30</span><span style='color:#d2cd86; '>,</span>
-                    yOffset<span style='color:#b060b0; '>:</span><span style='color:#008c00; '>80</span><span style='color:#d2cd86; '>,</span>
-                    zoomType<span style='color:#b060b0; '>:</span> <span style='color:#00c4c4; '>'reverse'</span>
-                    <span style='color:#9999a9; '>// More Options</span>
-                    <span style='color:#d2cd86; '>.</span><span style='color:#d2cd86; '>.</span><span style='color:#d2cd86; '>.</span>
-                <span style='color:#b060b0; '>}</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
-            <span style='color:#b060b0; '>}</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+        alwaysOn <span style='color:#b060b0; '>:</span> <span style='color:#0f4d75; '>false</span><span style='color:#d2cd86; '>,</span>
+        zoomWidth<span style='color:#b060b0; '>:</span> <span style='color:#008c00; '>250</span><span style='color:#d2cd86; '>,</span>
+        zoomHeight<span style='color:#b060b0; '>:</span><span style='color:#008c00; '>200</span><span style='color:#d2cd86; '>,</span>
+        position<span style='color:#b060b0; '>:</span><span style='color:#00c4c4; '>'left'</span><span style='color:#d2cd86; '>,</span>
+        xOffset<span style='color:#b060b0; '>:</span> <span style='color:#008c00; '>30</span><span style='color:#d2cd86; '>,</span>
+        yOffset<span style='color:#b060b0; '>:</span><span style='color:#008c00; '>80</span><span style='color:#d2cd86; '>,</span>
+        zoomType<span style='color:#b060b0; '>:</span> <span style='color:#00c4c4; '>'reverse'</span>
+        <span style='color:#9999a9; '>// More Options</span>
+        <span style='color:#d2cd86; '>.</span><span style='color:#d2cd86; '>.</span><span style='color:#d2cd86; '>.</span>
+    <span style='color:#b060b0; '>}</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+<span style='color:#b060b0; '>}</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
             </pre>
-
+            <h3>Galleries and Thumbnails</h3>
+            <p>
+            If you want to create galleries, RoomZoom.js can manage it for you.</p>
+            <p>Attach the gallery ID to your main anchor "rel" attribute.
+                <pre style='color:#d1d1d1;background:#000000;'><span style='color:#ff8906; '>&lt;</span><span style='color:#e66170; font-weight:bold; '>a</span> href<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"BIGIMAGE.JPG"</span> class<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"MYCLASS"</span> title<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"MYTITLE"</span> rel<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"gal1"</span><span style='color:#ff8906; '>></span>  
+    <span style='color:#ff8906; '>&lt;</span><span style='color:#e66170; font-weight:bold; '>img</span> src<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"SMALLIMAGE.JPG"</span> title<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"IMAGE TITLE"</span><span style='color:#ff8906; '>></span>  
+<span style='color:#ff8906; '>&lt;/</span><span style='color:#e66170; font-weight:bold; '>a</span><span style='color:#ff8906; '>></span>
+                </pre>
+            </p>
+            <p> Manage your thumbnails "class" and "rel" attributes.
+                The class "zoomThumbActive" is attached to your thumbnails by RoomZoom.js. By default specify this class to the selected thumbnail (it should be the same image in your main anchor element)
+                <pre style='color:#d1d1d1;background:#000000;'><span style='color:#ff8906; '>&lt;</span><span style='color:#e66170; font-weight:bold; '>a</span> class<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"zoomThumbActive"</span> href<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"LARGEIMAGE1.jpg"</span> rel<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"gallery:gal1"</span> rev<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"SMALLIMAGE1.jpg"</span><span style='color:#ff8906; '>></span>  
+    <span style='color:#ff8906; '>&lt;</span><span style='color:#e66170; font-weight:bold; '>img</span> src<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"thumbs/THUMBIMG1.jpg"</span><span style='color:#ff8906; '>></span>  
+<span style='color:#ff8906; '>&lt;/</span><span style='color:#e66170; font-weight:bold; '>a</span><span style='color:#ff8906; '>></span>
+                </pre>
+                The structure of the thumbnail rel attribute is very important. The base elements are
+                <ul>
+                    <li>
+                        gallery: the ID of the gallery to which it belongs.
+                    </li>
+                    <li>
+                        smallimage: the path to the SMALLIMAGE to be loaded on the when you click on the thumbnail.
+                    </li>
+                    <li>
+                        largeimage: the path to the LARGEIMAGE.
+                    </li>
+                </ul>
+            </p>
 
             <p></p><h2><a name="Configuration_options">Configuration Options</a></h2>
 
-            <p>Style customizations are obviously admitted simply changing the right parameters value in the jqzoom stylesheet file.
+            <p>Style customizations are obviously admitted simply changing the right parameters value in the roomzoom stylesheet file.
             </p>
             <p></p><table border="1" cellspacing="0">
                 <thead>
