@@ -7,7 +7,7 @@ Based on jQzoom Evolution Library v2.3 by Marco Renzi (http://www.mind-projects.
 
 == Demo ==
 
-To see a demo please visit [[http://roomine.github.com/RoomZoom.js/|github demo page]].
+To see a demo please visit [[http://obukhow.github.com/RoomZoom.js/|github demo page]].
 
 == Installation ==
 
